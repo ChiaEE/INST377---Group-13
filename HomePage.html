@@ -1,23 +1,28 @@
+<!DOCTYPE html>
 <html>
     <head>
         <Title> Book Database</Title>
         <link rel="stylesheet" href="HomePage.css">
-        <head>
-            <body>
-                <!-- Header Section -->
+    </head>    
+        <!-- Header Section -->
         <header id="bar">
             <h1>Paramount Book Search</h1>
         </header>
-        <!-- Navigation Menu -->
-        <nav id="main-nav">
-            <ul id="navList">
-                <li><a href="#" id="childrensBooksLink" target="_blank">Children's Books</a></li>
-                <li><a href="#" id="fictionBooksLink" target="_blank">Fiction Books</a></li>
-                <li><a href="#" id="comedyBooksLink" target="_blank" >Comedy Books</a></li>
-                <li><a href="#" id="romanceBooksLink" target="_blank">Romance Books</a></li>
-            </ul>
-        </nav>
-        <script>
+        <body>
+            <nav id="main-nav">
+                <!-- Navigation Menu -->
+                <ul id="navList">
+                    <li><a href="About_page.html"> About this website </a></li>
+                    <li><a href="#" id="childrensBooksLink" target="_blank">Children's Books</a></li>
+                    <li><a href="#" id="fictionBooksLink" target="_blank">Fiction Books</a></li>
+                    <li><a href="#" id="comedyBooksLink" target="_blank" >Comedy Books</a></li>
+                    <li><a href="#" id="romanceBooksLink" target="_blank">Romance Books</a></li>
+                </ul>
+            </nav>
+        </body>
+        
+        
+        <script type="text/javascript">
             function searchBooks() {
                 var searchQuery = document.getElementById("searchInput").value;
                 var url = "https://gutendex.com/books?search=" + encodeURIComponent(searchQuery);
@@ -105,7 +110,4 @@
                 }
             }
         </script>
-            </body>
-        </head>
-    </head>
 </html>
