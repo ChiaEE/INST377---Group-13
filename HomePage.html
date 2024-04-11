@@ -1,113 +1,30 @@
-<!DOCTYPE html>
 <html>
-    <head>
-        <Title> Book Database</Title>
-        <link rel="stylesheet" href="HomePage.css">
-    </head>    
-        <!-- Header Section -->
-        <header id="bar">
-            <h1>Paramount Book Search</h1>
-        </header>
-        <body>
-            <nav id="main-nav">
-                <!-- Navigation Menu -->
-                <ul id="navList">
-                    <li><a href="About_page.html"> About this website </a></li>
-                    <li><a href="#" id="childrensBooksLink" target="_blank">Children's Books</a></li>
-                    <li><a href="#" id="fictionBooksLink" target="_blank">Fiction Books</a></li>
-                    <li><a href="#" id="comedyBooksLink" target="_blank" >Comedy Books</a></li>
-                    <li><a href="#" id="romanceBooksLink" target="_blank">Romance Books</a></li>
-                </ul>
-            </nav>
-        </body>
-        
-        
-        <script type="text/javascript">
-            function searchBooks() {
-                var searchQuery = document.getElementById("searchInput").value;
-                var url = "https://gutendex.com/books?search=" + encodeURIComponent(searchQuery);
-    
-                fetch(url)
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        displayResults(data.results);
-                    })
-                    .catch(error => {
-                        console.error('There was a problem with the fetch operation:', error);
-                    });
-            }
-    
-            function displayResults(books) {
-                var resultsDiv = document.getElementById("results");
-                resultsDiv.innerHTML = ""; 
-    
-                if (books.length === 0) {
-                    resultsDiv.innerHTML = "No results found.";
-                } else {
-                    books.forEach(function (book) {
-                        var title = book.title;
-                        var author = book.authors[0].name;
-                        var bookLink = "https://www.gutenberg.org/ebooks/" + book.id;
-    
-                        var bookInfo = document.createElement("div");
-                        bookInfo.innerHTML = "<p><strong>Title:</strong> " + title + "<br>" +
-                                             "<strong>Author:</strong> " + author + "<br>" +
-                                             "<a href='" + bookLink + "' target='_blank'>Read on Project Gutenberg</a></p>";
-    
-                        resultsDiv.appendChild(bookInfo);
-                    });
-                }
-            }
-    
+<head>
+    <title>Book Database</title>
+    <link rel="stylesheet" href="HomePage.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header id="bar">
+        <h1>Paramount Book Search</h1>
+    </header>
 
-            document.addEventListener("DOMContentLoaded", function () {
-                fetch("https://gutendex.com/books?topic=children")
-                    .then(response => response.json())
-                    .then(data => {
-                        displayBooksInNavbar(data.results, "childrensBooksLink");
-                    });
-    
-                fetch("https://gutendex.com/books?topic=fiction")
-                    .then(response => response.json())
-                    .then(data => {
-                        displayBooksInNavbar(data.results, "fictionBooksLink");
-                    });
+    <nav id="main-nav">
+        <!-- Navigation Menu -->
+        <ul id="navList">
+            <li><a href="HomePage.html">HOME</a></li>
+            <li><a href="About_page.html">About Page</a></li>
+            <li id="childrensBooksLink"><a href="Children'sBooks.html">Children's</a></li>
+            <li id="fictionBooksLink"><a href="FictionBooks.html">Fiction</a></li>
+            <li id="comedyBooksLink"><a href="ComedyBooks.html">Comedy</a></li>
+            <li id="romanceBooksLink"><a href="RomanceBooks.html">Romance</a></li>
+        </ul>
+    </nav>
 
-                fetch("https://gutendex.com/books?topic=comedy")
-                    .then(response => response.json())
-                    .then(data => {
-                        displayBooksInNavbar(data.results, "comedyBooksLink");
-                    });
-                fetch("https://gutendex.com/books?topic=comedy")
-                    .then(response => response.json())
-                    .then(data => {
-                        displayBooksInNavbar(data.results, "romanceBooksLink");
-                    });
-            });
-    
-            function displayBooksInNavbar(books, navLinkId) {
-                var navLink = document.getElementById(navLinkId);
-                var navList = document.getElementById("navList");
-    
-                if (books.length > 0) {
-                    var navDropdown = document.createElement("ul");
-                    books.forEach(function (book) {
-                        var title = book.title;
-                        var bookLink = "https://www.gutenberg.org/ebooks/" + book.id;
-                        var listItem = document.createElement("li");
-                        listItem.innerHTML = "<a href='" + bookLink + "' target='_blank'>" + title + "</a>";
-                        navDropdown.appendChild(listItem);
-                    });
-                    navLink.appendChild(navDropdown);
-                } else {
-                
-                    navList.removeChild(navLink.parentNode);
-                }
-            }
-        </script>
+    <div id="results"></div>
+</body>
 </html>
+
+
+    
+    
