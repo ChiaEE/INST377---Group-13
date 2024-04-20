@@ -1,12 +1,12 @@
 <html>
 <head>
-    <title>Comedy Books</title>
+    <title>Mystery Books</title>
     <link rel="stylesheet" href="HomePage.css">
 </head>
 <body>
     <!-- Header Section -->
     <header id="bar">
-        <h1>Comedy Books</h1>
+        <h1>Mystery Books</h1>
     </header>
 
     <!-- Navigation Menu -->
@@ -26,17 +26,16 @@
     </nav>
 
    
-    <div id="comedyBooksList"></div>
+    <div id="MysteryBooksList"></div>
 
     <!-- JavaScript -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            fetchBooks("comedyBooksList"); 
+            fetchBooks("MysteryBooksList"); 
         });
 
         function fetchBooks(containerId) {
-            var topic = containerId.replace("BooksList", "").toLowerCase();
-            fetch("https://gutendex.com/books?topic=" + topic)
+            fetch("https://gutendex.com/books?topic=mystery")
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
