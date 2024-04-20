@@ -1,12 +1,12 @@
 <html>
 <head>
-    <title>Comedy Books</title>
+    <title>Young Adult Books</title>
     <link rel="stylesheet" href="HomePage.css">
 </head>
 <body>
     <!-- Header Section -->
     <header id="bar">
-        <h1>Comedy Books</h1>
+        <h1>Young Adult Books</h1>
     </header>
 
     <!-- Navigation Menu -->
@@ -20,24 +20,22 @@
             <li id="romanceBooksLink"><a href="RomanceBooks.html">Romance Books</a></li>
             <li id="dramaBooksLink"><a href="DramaBooks.html">Drama Books</a></li>
             <li id="sciBooksLink"><a href="ScienceBooks.html">Science Books</a></li>
-            <li id="horrorBooksLink"><a href="HorrorBooks.html">Horror Books</a></li>
             <li id="mysteryBooksLink"><a href="MysteryBooks.html">Mystery Books</a></li>
             <li id="YABooksLink"><a href="YABooks.html">Young Adult Books</a></li>
         </ul>
     </nav>
 
-   
-    <div id="comedyBooksList"></div>
+
+    <div id="YABooksList"></div>
 
     <!-- JavaScript -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            fetchBooks("comedyBooksList"); 
+            fetchBooks("YABooksList"); 
         });
 
         function fetchBooks(containerId) {
-            var topic = containerId.replace("BooksList", "").toLowerCase();
-            fetch("https://gutendex.com/books?topic=" + topic)
+            fetch("https://gutendex.com/books?topic=young")
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -68,7 +66,7 @@
                     var li = document.createElement("li");
                     li.innerHTML = "<strong>Title:</strong> " + title + "<br>" +
                         "<strong>Author:</strong> " + author + "<br>" +
-                        "<a href='" + bookLink + "' target='_blank'>Read on Project Gutenberg</a>";
+                        "<a href='" + bookLink + "' target='_blank'>Read on Project Gutenberg</a>" + "<br>";
 
                     ul.appendChild(li);
                 });
