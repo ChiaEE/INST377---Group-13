@@ -27,53 +27,61 @@
     </nav>
 
    
-    <div id="romanceBooksList"></div>
+    <div id="romanceBooksList">
+        <div id="loadingIndicator" style="display: none;">Loading books...</div>
+    </div>
 
     <!-- JavaScript -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            fetchBooks("romanceBooksList"); 
-        });
+    fetchBooks("romanceBooksList"); 
+});
 
-        function fetchBooks(containerId) {
-            fetch("https://gutendex.com/books?topic=romance")
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    displayBooks(data.results, containerId);
-                })
-                .catch(error => {
-                    console.error('There was a problem with the fetch operation:', error);
-                });
-        }
+function fetchBooks(containerId) {
+    var loadingElement = document.getElementById('loadingIndicator');
+    loadingElement.style.display = 'block'; // Show the loading indicator
 
-        function displayBooks(books, containerId) {
-            var container = document.getElementById(containerId);
-            container.innerHTML = "";
-
-            if (books.length === 0) {
-                container.innerHTML = "No results found.";
-            } else {
-                var ul = document.createElement("ul");
-                books.forEach(function (book) {
-                    var title = book.title;
-                    var author = book.authors[0].name;
-                    var bookLink = book.formats["text/html"];
-
-                    var li = document.createElement("li");
-                    li.innerHTML = "<strong>Title:</strong> " + title + "<br>" +
-                        "<strong>Author:</strong> " + author + "<br>" +
-                        "<a href='" + bookLink + "' target='_blank'>Read on Project Gutenberg</a>";
-
-                    ul.appendChild(li);
-                });
-                container.appendChild(ul);
+    fetch("https://gutendex.com/books?topic=romance")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
             }
-        }
+            return response.json();
+        })
+        .then(data => {
+            displayBooks(data.results, containerId);
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        })
+        .finally(() => {
+            loadingElement.style.display = 'none'; // Hide the loading indicator
+        });
+}
+
+function displayBooks(books, containerId) {
+    var container = document.getElementById(containerId);
+    container.innerHTML = "";
+
+    if (books.length === 0) {
+        container.innerHTML = "No results found.";
+    } else {
+        var ul = document.createElement("ul");
+        books.forEach(function (book) {
+            var title = book.title;
+            var author = book.authors[0].name;
+            var bookLink = book.formats["text/html"];
+
+            var li = document.createElement("li");
+            li.innerHTML = "<strong>Title:</strong> " + title + "<br>" +
+                "<strong>Author:</strong> " + author + "<br>" +
+                "<a href='" + bookLink + "' target='_blank'>Read on Project Gutenberg</a>";
+
+            ul.appendChild(li);
+        });
+        container.appendChild(ul);
+    }
+}
     </script>
 </body>
 </html>
