@@ -27,7 +27,9 @@
     </nav>
 
 
-    <div id="childrenBooksList"></div>
+    <div id="childrenBooksList">
+        <div id="loadingIndicator" style="display: none;">Loading books...</div>
+    </div>
 
     <!-- JavaScript -->
     <script>
@@ -36,21 +38,27 @@
         });
 
         function fetchBooks(containerId) {
-            var topic = containerId.replace("BooksList", "").toLowerCase();
-            fetch("https://gutendex.com/books?topic=" + topic)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    displayBooks(data.results, containerId);
-                })
-                .catch(error => {
-                    console.error('There was a problem with the fetch operation:', error);
-                });
-        }
+    var topic = containerId.replace("BooksList", "").toLowerCase();
+    var loadingElement = document.getElementById('loadingIndicator');
+    loadingElement.style.display = 'block'; // Show the loading indicator
+
+    fetch("https://gutendex.com/books?topic=" + topic)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            displayBooks(data.results, containerId);
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        })
+        .finally(() => {
+            loadingElement.style.display = 'none'; // Hide the loading indicator
+        });
+}
 
         function displayBooks(books, containerId) {
             var container = document.getElementById(containerId);
