@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <title> Non-Fiction books </title>
+        <link rel="stylesheet" href="HomePage.css">
+    </head>
+    <body>
+        <header id="bar">
+            <h1> Non-Fiction books </h1>
+        </header>
+        <!-- Main navigation for the website -->
+        <nav id="main-nav">
+            <ul id="navList">
+                <li><a href="HomePage.html">HOME</a></li>
+                <li><a href="About_page.html">ABOUT</a></li>
+                <li id="childrensBooksLink"><a href="Children'sBooks.html">Children's Books</a></li>
+                <li id="fictionBooksLink"><a href="FictionBooks.html">Fiction Books</a></li>
+                <li id="nonFictionBooks"><a href="NonFictionBooks.html"> Non-Fiction Books </a></li>
+                <li id="comedyBooksLink"><a href="ComedyBooks.html">Comedy Books</a></li>
+                <li id="romanceBooksLink"><a href="RomanceBooks.html">Romance Books</a></li>
+                <li id="dramaBooksLink"><a href="DramaBooks.html">Drama Books</a></li>
+                <li id="sciBooksLink"><a href="ScienceBooks.html">Science Books</a></li>
+                <li id="horrorBooksLink"><a href="HorrorBooks.html">Horror Books</a></li>
+                <li id="mysteryBooksLink"><a href="MysteryBooks.html">Mystery Books</a></li>
+                <li id="YABooksLink"><a href="YABooks.html">Young Adult Books</a></li>
+            </ul>
+        </nav>
+
+        <div id="nonFictionBookList"></div>
+
+        <script type="text/javascript">
+            document.addEventListener("DOMContentLoaded", function () {
+                fetchBooks("nonFictionBookList"); 
+            });
+
+            /* This function gets the books from the mentioned API. */
+            function fetchBooks(containerId) {
+                fetch("https://gutendex.com/books?topic=nonfiction")
+                .then(response => {
+                    // get the JSON file iff possible.
+                    if(!response) {
+                        throw new Error("Network response was not ok")
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    displayBooks(data.results, containerId);
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                })
+            }
+
+            // We display the books in a certain container on the webpage. 
+            function displayBooks(books, containerId) {
+                var container = document.getElementById(containerId);
+                container.innerHTML = "";
+
+                if(books.length == 0) {
+                    container.innerHTML = "No results found.";
+                } else {
+                    var ul = document.createElement("ul");
+                    books.forEach(function (book) {
+                        var title = book.title;
+                        var author = book.authors[0].name;
+                        var bookLink = book.formats["text/html"];
+
+                        var li = document.createElement("li");
+                        li.innerHTML = "<strong>Title:</strong> " + title + "<br>" +
+                            "<strong>Author:</strong> " + author + "<br>" +
+                            "<a href='" + bookLink + "' target='_blank'>Read on Project Gutenberg</a>";
+
+                        ul.appendChild(li);
+                    });
+                    container.appendChild(ul);
+                }
+            }
+        </script>
+
+    </body>
+</html>
