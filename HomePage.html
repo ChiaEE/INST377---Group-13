@@ -31,10 +31,11 @@
     
     <!-- Search Bar -->
     <div class="search-container">
-        <form action="#" method="get">
+        <form onsubmit="performSearch(event)">
             <input type="text" class="search-input" placeholder="Search...">
             <button type="submit" class="search-button">Search</button>
         </form>
+        <div id="loading-indicator" style="display: none;">Loading Results...</div>
     </div>
 
     <script type="text/javascript">
@@ -59,10 +60,20 @@
             console.log("Pages 1-32 details: ", secondPageBooks);
         }
 
+        window.onload = extractSecondPageStuff;
+    </script>
 
-        function performSearch() {
-            let searchItem = document.getElementsByClassName("search-input");
+
+    <script>
+
+        function performSearch(event) {
+            event.preventDefault();
+
+            let searchItem = document.querySelector(".search-input").value;
             var booksDetails = [];
+
+            document.getElementById("loading-indicator").style.display = "block";
+
             // This code extracts the data from the first page of the Gutendex API. 
             fetch("https://gutendex.com/books")
             .then((res) => res.json())
@@ -71,21 +82,22 @@
                     if(Object.prototype.hasOwnProperty.call(res, key)) {
                         // If the key is results, we add all the details to the bookDetails Array.
                         if(key === "results") {
-                            booksDetails.push(res[key]);
+                            booksDetails.push(...res[key]);
                         }
                     }
                 }
-            });
+            
 
-            for(let i = 0; i < booksDetails.length; i++) {
-                if(booksDetails[i]["title"] === searchItem) {
-                    console.log("Book title found.")
-                }
-            }
-            console.log(booksDetails);
-        }
+                const searchResults = booksDetails.filter(book =>{
+                    return book.title.toLowerCase().includes(searchItem.toLowerCase());
+                });
 
-        window.onload = extractSecondPageStuff;
+            document.getElementById("loading-indicator").style.display = "none";
+
+            window.location.href = "search_results_page.html?query=" + encodeURIComponent(searchItem) + "&results=" + encodeURIComponent(JSON.stringify(searchResults));
+        });
+    }
+
     </script>
 
 </body>
