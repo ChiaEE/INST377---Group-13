@@ -26,18 +26,23 @@
             </ul>
         </nav>
 
-        <div id="nonFictionBookList"></div>
+        <div id="nonFictionBookList">
+            <div id="loadingIndicator" style="display: none;">Loading Books...</div>
+        </div>
 
-        <script type="text/javascript">
+        <script>
             document.addEventListener("DOMContentLoaded", function () {
                 fetchBooks("nonFictionBookList"); 
             });
 
             /* This function gets the books from the mentioned API. */
             function fetchBooks(containerId) {
+                var loadingElement = document.getElementById('loadingindicator');
+                loadingElement.style.display = 'block';
+
                 fetch("https://gutendex.com/books?topic=nonfiction")
                 .then(response => {
-                    // get the JSON file iff possible.
+                    // get the JSON file if possible.
                     if(!response) {
                         throw new Error("Network response was not ok")
                     }
@@ -48,6 +53,9 @@
                 })
                 .catch(error => {
                     console.error('There was a problem with the fetch operation:', error);
+                })
+                .finally(() => {
+                    loadingElement.style.display = none;
                 })
             }
 
@@ -64,7 +72,7 @@
                         var title = book.title;
                         var author = book.authors[0].name;
                         var bookLink = book.formats["text/html"];
-
+                        console.log("Book details: ", title, author);
                         var li = document.createElement("li");
                         li.innerHTML = "<strong>Title:</strong> " + title + "<br>" +
                             "<strong>Author:</strong> " + author + "<br>" +
@@ -75,6 +83,7 @@
                     container.appendChild(ul);
                 }
             }
+            window.onload = displayBooks;
         </script>
 
     </body>
