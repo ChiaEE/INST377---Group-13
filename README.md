@@ -3,7 +3,9 @@ Book Database using Gutendex API
 
 Title: Book Database
 
-Description of your project: This website purpose is to access copyright-free books inside the gutendex database. The reason why we are creating this website is so movie directors would have easier access to books for plot and character inspiration.
+Description of your project: This website purpose is to access copyright-free books inside the gutendex database. The reason why we are creating this website is so movie directors would have easier access to books for plot and character inspiration. 
+
+This webpage contains subpages, which contain lists of books in a specific genre. The homepage contains the sub-pages as well as a search box that allows users to search for any book in Project Gutenberg.  
 
 Description of target browsers (iOS? Android? Which ones?): Desktop Browser
 

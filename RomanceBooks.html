@@ -62,12 +62,12 @@
 
         function displayBooks(books, containerId) {
             var container = document.getElementById(containerId);
-
+            container.innerHTML = "";
             if(books.length == 0) {
                 container.innerHTML = "No results found.";
             } else {
                 var ul = document.createElement("ul");
-                container.innerHTML = "";
+                
                 // Traverse through the dictionary and add values to container.
                 for(var key of Object.keys(books)) {
                     if(Object.prototype.hasOwnProperty.call(books, key)) {
@@ -86,7 +86,7 @@
                 }
             }
         }
-        window.onload = displayBooks;
+        
     </script>
 </body>
 </html>
