@@ -29,6 +29,7 @@
     <div id="results"></div>
     <br><br><br>
     
+    
     <!-- Search Bar -->
     <div class="search-container">
         <form onsubmit="performSearch(event)">
@@ -65,12 +66,40 @@
                     return book.title.toLowerCase().includes(searchItem.toLowerCase());
                 });
 
-            document.getElementById("loading-indicator").style.display = "none";
+                document.getElementById("loading-indicator").style.display = "none";
 
-            window.location.href = "search_results_page.html?query=" + encodeURIComponent(searchItem) + "&results=" + encodeURIComponent(JSON.stringify(searchResults));
-        });
-    }
+                displayResults(searchResults); // Display the search results
+            });
+        }
 
+        function displayResults(searchResults) {
+            const resultsContainer = document.getElementById("results");
+            resultsContainer.innerHTML = ""; // Clear previous search results
+
+            searchResults.forEach(book => {
+                // Create a container for each book
+                const bookContainer = document.createElement("div");
+                bookContainer.classList.add("book-container");
+
+                // Create elements for title, author, and code
+                const titleElement = document.createElement("h2");
+                titleElement.textContent = book.title;
+
+                const authorElement = document.createElement("p");
+                authorElement.textContent = "Author: " + book.authors[0].name;
+
+                const subjectsElement = document.createElement("p");
+                subjectsElement.textContent = "Subjects: " + book.subjects.join(", ");
+
+                // Append elements to the book container
+                bookContainer.appendChild(titleElement);
+                bookContainer.appendChild(authorElement);
+                bookContainer.appendChild(subjectsElement);
+
+                // Append the book container to the results container
+                resultsContainer.appendChild(bookContainer);
+            });
+        }
     </script>
 
 </body>
