@@ -3,6 +3,7 @@
 <head>
     <title>Book Database</title>
     <link rel="stylesheet" href="HomePage.css">
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
     <script src="search_page_stuff.js" defer></script>
 </head>
 <body style="background-color: #226ca1;">
@@ -49,8 +50,12 @@
     <br><br>
 
     <div id="results"></div>
-    
+
+    <!--Slider-->
+    <div class="main-carousel"></div>
+    <script src="Home.js"></script>
     <script>
+        
         function performSearch(event) {
             event.preventDefault();
 
@@ -131,6 +136,7 @@
         }
 
     </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.2.2/flickity.pkgd.min.js"></script>
 
-</body
+</body>
 

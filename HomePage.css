@@ -123,6 +123,37 @@
     border-color: #226ca1;
 }
 
+.content {
+    display: flex;
+    justify-content: flex-end; /* Align content to the right */
+    align-items: flex-end; /* Align items to the bottom */
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+/* Filter Dropdown */
+.filter-container {
+    margin-right: 20px; /* Adjust to create space between items */
+}
+
+/* Search Bar */
+.search-container {
+    margin-bottom: 20px;
+}
+
+/* Book Containers */
+.book-container {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-right: 20px; /* Adjust to create space between items */
+    margin-bottom: 20px;
+    width: calc(50% - 20px); /* Adjust width as needed */
+}
+
+.book-container h2 {
+    margin-top: 0;
+}
 
 #loadingIndicator {
     color: #2a2a2a;
@@ -130,3 +161,28 @@
     text-align: center;
     padding: 20px;
 }
+
+/* Style for carousel container */
+.main-carousel {
+    width: 80%; /* Adjust the width as needed */
+    margin: 0 auto; /* Center the carousel */
+}
+
+/* Style for carousel cells */
+.main-carousel .carousel-cell {
+    width: 200px; /* Adjust the width of individual cells */
+    height: 300px; /* Adjust the height of individual cells */
+    margin-right: 10px; /* Adjust the margin between cells */
+    border-radius: 5px; /* Rounded corners for cells */
+    overflow: hidden; /* Hide overflow content */
+}
+
+/* Style for images inside carousel cells */
+.main-carousel img {
+    width: 100%; /* Ensure the image fills the cell */
+    height: 100%; /* Ensure the image fills the cell */
+    object-fit: cover; /* Maintain aspect ratio and cover the cell */
+}
+
+
+  
