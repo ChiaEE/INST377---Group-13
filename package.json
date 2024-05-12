@@ -2,7 +2,6 @@
   "name": "inst377---group-13",
   "version": "1.0.0",
   "description": "Book Database using Gutendex API",
-  "main": "deployment.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
