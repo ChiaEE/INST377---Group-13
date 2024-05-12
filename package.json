@@ -4,7 +4,7 @@
   "description": "Book Database using Gutendex API",
   "main": "deployment.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "run": "nodemon -e '*'"
   },
   "repository": {
     "type": "git",
