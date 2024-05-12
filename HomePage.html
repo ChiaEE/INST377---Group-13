@@ -57,38 +57,57 @@
     <script src="Home.js"></script>
     <script>
         
-        function performSearch(event) {
-            event.preventDefault();
+    function performSearch(event) {
+        event.preventDefault();
 
-            let searchItem = document.querySelector(".search-input").value;
-            var booksDetails = [];
+        let searchItem = document.querySelector(".search-input").value;
+        var booksDetails = [];
+        const apiUrlBase = "https://gutendex.com/books";
+        const totalPages = 20; // Set the total number of pages to fetch
 
-            document.getElementById("loading-indicator").style.display = "block";
+        document.getElementById("loading-indicator").style.display = "block";
 
-            // This code extracts the data from the first page of the Gutendex API. 
-            fetch("https://gutendex.com/books")
+    // Recursive function to fetch all pages of results
+    function fetchAllPages(page) {
+        const apiUrl = `${apiUrlBase}?page=${page}`;
+
+        fetch(apiUrl)
             .then((res) => res.json())
             .then((res) => {
-                for(var key of Object.keys(res)) {
-                    if(Object.prototype.hasOwnProperty.call(res, key)) {
+                for (var key of Object.keys(res)) {
+                    if (Object.prototype.hasOwnProperty.call(res, key)) {
                         // If the key is results, we add all the details to the bookDetails Array.
-                        if(key === "results") {
+                        if (key === "results") {
                             booksDetails.push(...res[key]);
                         }
                     }
                 }
-                
-                
-                const searchResults = booksDetails.filter(book =>{
-                    return book.title.toLowerCase().includes(searchItem.toLowerCase());
-                });
 
+                // Check if there are more pages to fetch
+                if (page < totalPages) {
+                    // Fetch the next page recursively
+                    fetchAllPages(page + 1);
+                } else {
+                    // Once all pages are fetched, filter and display results
+                    const searchResults = booksDetails.filter(book => {
+                        return book.title.toLowerCase().includes(searchItem.toLowerCase());
+                    });
+
+                    document.getElementById("loading-indicator").style.display = "none";
+
+                    displayResults(searchResults); // Display the search results
+                    filterResults(); // Apply the filter
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
                 document.getElementById("loading-indicator").style.display = "none";
-
-                displayResults(searchResults); // Display the search results
-                filterResults(); // Apply the filter
             });
-        }
+    }
+
+    // Start fetching from page 1
+    fetchAllPages(1);
+}
 
         function displayResults(searchResults) {
             const resultsContainer = document.getElementById("results");
