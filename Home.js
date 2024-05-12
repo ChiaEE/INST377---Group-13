@@ -20,7 +20,7 @@ function fetchRandomBooks() {
 function createCarouselCell(book) {
     return `
         <div class="carousel-cell">
-            <a href="${book.formats['image/jpeg']}">
+            <a href="${book.formats['text/html']}">
                 <img src="${book.formats['image/jpeg']}" alt="${book.title}">
             </a>
         </div>
