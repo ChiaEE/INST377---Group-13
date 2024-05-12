@@ -92,6 +92,38 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Style for the filter container */
+.filter-container {
+    margin-top: 20px;
+}
+
+/* Style for the label */
+.filter-container label {
+    margin-right: 10px;
+}
+
+/* Style for the select dropdown */
+.filter-container select {
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+}
+
+/* Style for the options in the dropdown */
+.filter-container select option {
+    background-color: #fff;
+    color: #333;
+}
+
+/* Style for the select dropdown when it's hovered */
+.filter-container select:hover {
+    border-color: #226ca1;
+}
+
+
 #loadingIndicator {
     color: #2a2a2a;
     font-size: 18px;
