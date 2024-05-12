@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Database</title>
+    <link rel="stylesheet" href="HomePage.css">
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <script src="search_page_stuff.js" defer></script>
+</head>
+<body style="background-color: #226ca1;">
+    <!-- Header Section -->
+    <header id="bar">
+        <h1>Paramount Book Search</h1>
+    </header>
+
+    <nav id="main-nav">
+        <ul id="navList">
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="About_page.html">ABOUT</a></li>
+            <li id="childrensBooksLink"><a href="Children'sBooks.html">Children's Books</a></li>
+            <li id="fictionBooksLink"><a href="FictionBooks.html">Fiction Books</a></li>
+            <li id="nonFictionBooks"><a href="NonFictionBooks.html"> Non-Fiction Books </a></li>
+            <li id="comedyBooksLink"><a href="ComedyBooks.html">Comedy Books</a></li>
+            <li id="romanceBooksLink"><a href="RomanceBooks.html">Romance Books</a></li>
+            <li id="dramaBooksLink"><a href="DramaBooks.html">Drama Books</a></li>
+            <li id="sciBooksLink"><a href="ScienceBooks.html">Science Books</a></li>
+            <li id="horrorBooksLink"><a href="HorrorBooks.html">Horror Books</a></li>
+            <li id="mysteryBooksLink"><a href="MysteryBooks.html">Mystery Books</a></li>
+        </ul>
+    </nav>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+        <form onsubmit="performSearch(event)">
+            <input type="text" class="search-input" placeholder="Search...">
+            <button type="submit" class="search-button">Search</button>
+        </form>
+        <div id="loading-indicator" style="display: none;">Loading Results...</div>
+    </div>
+
+    <!-- Filter Dropdown -->
+    <div class="filter-container">
+        <label for="copyright-filter">Copyright:</label>
+        <select id="copyright-filter" onchange="filterResults()">
+            <option value="all">All</option>
+            <option value="copyrighted">Copyrighted</option>
+            <option value="public-domain">Public Domain</option>
+        </select>
+    </div>
+
+    <br><br>
+
+    <div id="results"></div>
+
+    <!--Slider-->
+    <h2 style="text-align: center; color: white;"> Click a Cover to Read the Book!</h2>
+    <div class="main-carousel"></div>
+    <script src="Home.js"></script>
+    <script>
+        
+    function performSearch(event) {
+        event.preventDefault();
+
+        let searchItem = document.querySelector(".search-input").value;
+        var booksDetails = [];
+        const apiUrlBase = "https://gutendex.com/books";
+        const totalPages = 20; // Set the total number of pages to fetch
+
+        document.getElementById("loading-indicator").style.display = "block";
+
+    // Recursive function to fetch all pages of results
+    function fetchAllPages(page) {
+        const apiUrl = `${apiUrlBase}?page=${page}`;
+
+        fetch(apiUrl)
+            .then((res) => res.json())
+            .then((res) => {
+                for (var key of Object.keys(res)) {
+                    if (Object.prototype.hasOwnProperty.call(res, key)) {
+                        // If the key is results, we add all the details to the bookDetails Array.
+                        if (key === "results") {
+                            booksDetails.push(...res[key]);
+                        }
+                    }
+                }
+
+                // Check if there are more pages to fetch
+                if (page < totalPages) {
+                    // Fetch the next page recursively
+                    fetchAllPages(page + 1);
+                } else {
+                    // Once all pages are fetched, filter and display results
+                    const searchResults = booksDetails.filter(book => {
+                        return book.title.toLowerCase().includes(searchItem.toLowerCase());
+                    });
+
+                    document.getElementById("loading-indicator").style.display = "none";
+
+                    displayResults(searchResults); // Display the search results
+                    filterResults(); // Apply the filter
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                document.getElementById("loading-indicator").style.display = "none";
+            });
+    }
+
+    // Start fetching from page 1
+    fetchAllPages(1);
+}
+
+        function displayResults(searchResults) {
+            const resultsContainer = document.getElementById("results");
+            resultsContainer.innerHTML = ""; // Clear previous search results
+
+            searchResults.forEach(book => {
+                // Create a container for each book
+                const bookContainer = document.createElement("div");
+                bookContainer.classList.add("book-container");
+                bookContainer.setAttribute("data-copyright", book.copyright); // Add copyright attribute
+
+                // Create elements for title, author, and subjects
+                const titleElement = document.createElement("h2");
+                titleElement.textContent = book.title;
+
+                const authorElement = document.createElement("p");
+                authorElement.textContent = "Author: " + book.authors[0].name;
+
+                const subjectsElement = document.createElement("p");
+                subjectsElement.textContent = "Subjects: " + book.subjects.join(", ");
+
+                // Append elements to the book container
+                bookContainer.appendChild(titleElement);
+                bookContainer.appendChild(authorElement);
+                bookContainer.appendChild(subjectsElement);
+
+                // Append the book container to the results container
+                resultsContainer.appendChild(bookContainer);
+            });
+        }
+
+        function filterResults() {
+            const filterValue = document.getElementById("copyright-filter").value;
+            const resultsContainer = document.getElementById("results");
+            const bookContainers = resultsContainer.getElementsByClassName("book-container");
+
+            Array.from(bookContainers).forEach(container => {
+                const copyright = container.getAttribute("data-copyright");
+
+                if (filterValue === "all" || (filterValue === "copyrighted" && copyright === "true") || (filterValue === "public-domain" && copyright === "false")) {
+                    container.style.display = "block";
+                } else {
+                    container.style.display = "none";
+                }
+            });
+        }
+
+    </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.2.2/flickity.pkgd.min.js"></script>
+
+</body>
+

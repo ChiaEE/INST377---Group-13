@@ -4,6 +4,9 @@
   "description": "Book Database using Gutendex API",
   "main": "deployment.js",
   "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "run": "nodemon -e '*'"
   },
   "repository": {
@@ -19,6 +22,12 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.43.1",
     "express": "^4.19.2",
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.23.1"
+  },
+  "devDependencies": {
+    "vite": "^5.2.11"
   }
 }
