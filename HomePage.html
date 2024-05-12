@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
     <title>Book Database</title>
@@ -26,10 +27,6 @@
         </ul>
     </nav>
 
-    <div id="results"></div>
-    <br><br><br>
-    
-    
     <!-- Search Bar -->
     <div class="search-container">
         <form onsubmit="performSearch(event)">
@@ -38,8 +35,20 @@
         </form>
         <div id="loading-indicator" style="display: none;">Loading Results...</div>
     </div>
-    <script>
 
+    <!-- Filter Dropdown -->
+    <div class="filter-container">
+        <label for="copyright-filter">Copyright:</label>
+        <select id="copyright-filter" onchange="filterResults()">
+            <option value="all">All</option>
+            <option value="copyrighted">Copyrighted</option>
+            <option value="public-domain">Public Domain</option>
+        </select>
+    </div>
+
+    <div id="results"></div>
+    
+    <script>
         function performSearch(event) {
             event.preventDefault();
 
@@ -69,6 +78,7 @@
                 document.getElementById("loading-indicator").style.display = "none";
 
                 displayResults(searchResults); // Display the search results
+                filterResults(); // Apply the filter
             });
         }
 
@@ -80,8 +90,9 @@
                 // Create a container for each book
                 const bookContainer = document.createElement("div");
                 bookContainer.classList.add("book-container");
+                bookContainer.setAttribute("data-copyright", book.copyright); // Add copyright attribute
 
-                // Create elements for title, author, and code
+                // Create elements for title, author, and subjects
                 const titleElement = document.createElement("h2");
                 titleElement.textContent = book.title;
 
@@ -100,11 +111,24 @@
                 resultsContainer.appendChild(bookContainer);
             });
         }
+
+        function filterResults() {
+            const filterValue = document.getElementById("copyright-filter").value;
+            const resultsContainer = document.getElementById("results");
+            const bookContainers = resultsContainer.getElementsByClassName("book-container");
+
+            Array.from(bookContainers).forEach(container => {
+                const copyright = container.getAttribute("data-copyright");
+
+                if (filterValue === "all" || (filterValue === "copyrighted" && copyright === "true") || (filterValue === "public-domain" && copyright === "false")) {
+                    container.style.display = "block";
+                } else {
+                    container.style.display = "none";
+                }
+            });
+        }
+
     </script>
 
-</body>
-</html>
+</body
 
-
-    
-    
