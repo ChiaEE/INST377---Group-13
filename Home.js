@@ -48,6 +48,3 @@ function initializeCarousel() {
 
 // Call initializeCarousel function when the page loads
 window.addEventListener('load', initializeCarousel);
-
-// Add your existing JavaScript functions for search, display results, and filter here
-// ...

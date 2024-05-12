@@ -146,9 +146,8 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
-    margin-right: 20px; /* Adjust to create space between items */
-    margin-bottom: 20px;
-    width: calc(50% - 20px); /* Adjust width as needed */
+    margin: 20px auto; /* Adjust margin to center horizontally */
+    width: calc(70% - 20px); /* Adjust width as needed */
 }
 
 .book-container h2 {
