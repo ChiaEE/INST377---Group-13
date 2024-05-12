@@ -73,7 +73,7 @@
 
         fetch(apiUrl)
             .then((res) => res.json())
-            .then((res) => 
+            .then((res) => {
                 for (var key of Object.keys(res)) {
                     if (Object.prototype.hasOwnProperty.call(res, key)) {
                         // If the key is results, we add all the details to the bookDetails Array.
