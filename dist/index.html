@@ -2,10 +2,9 @@
 <html>
 <head>
     <title>Book Database</title>
-
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
-
-  <link rel="stylesheet" crossorigin href="dist/assets/index-CPeOkahq.css">
+    
+  <link rel="stylesheet" crossorigin href="/assets/index-CPeOkahq.css">
 </head>
 <body style="background-color: #226ca1;">
     <!-- Header Section -->
@@ -97,7 +96,7 @@
                     document.getElementById("loading-indicator").style.display = "none";
 
                     displayResults(searchResults); // Display the search results
-                    filterResults(); // Apply the filter
+                    filterResults(); 
                 }
             })
             .catch(error => {
