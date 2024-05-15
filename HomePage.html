@@ -184,8 +184,8 @@
             const selectedGenre = document.getElementById("genre-select").value;
             fetchBooks(selectedGenre);
 
-            // Show the chart container when the form is submitted
-            document.querySelector(".chart-container").style.display = "block";
+        // Show the chart container when the form is submitted
+            ocument.querySelector(".chart-container").style.display = "block";
         });
 
         // Function to fetch books from the API URL based on the selected genre
@@ -211,40 +211,30 @@
             });
         }
 
-function displayChart(titles, downloadCounts) {
-    const ctx = document.getElementById('chartCanvas').getContext('2d');
-    const myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: titles,
-            datasets: [{
-                label: 'Download Counts',
-                data: downloadCounts,
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                borderColor: 'rgba(255, 99, 132, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            },
-            plugins: {
-                legend: {
-                    display: true,
-                    labels: {
-                        color: 'white' // Set legend text color to white
+        // Function to display the chart
+        function displayChart(titles, downloadCounts) {
+            const ctx = document.getElementById('chartCanvas').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: titles,
+                    datasets: [{
+                        label: 'Most Downloaded',
+                        data: downloadCounts,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
                     }
                 }
-            },
-            // Set background color of the chart to white
-            backgroundColor: 'white'
+            });
         }
-    });
-}
-
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.2.2/flickity.pkgd.min.js"></script>
 </body>
