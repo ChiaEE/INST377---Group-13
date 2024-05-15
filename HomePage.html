@@ -57,6 +57,7 @@
             <label for="genre-select">Select Genre:</label>
             <select id="genre-select">
                 <option value="children">Children</option>
+                <option value="romance">Romance</option>
                 <option value="nonfiction">Non-Fiction</option>
                 <!-- Add other genres as needed -->
             </select>
@@ -76,9 +77,6 @@
     
     <script src="Home.js"></script>
     <script>
-        // Supabase initialization
-        const supabase = createClient('https://dkrtmelljyeyesrteyhf.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRrcnRtZWxsanlleWVzcnRleWhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTU1MzUxNTUsImV4cCI6MjAzMTExMTE1NX0.xLDZ3H1Y0sGUC8tVAccJqm5YK2hwtZyWMB_AZD5vb74');
-
         // Function to perform book search
         function performSearch(event) {
             event.preventDefault();
@@ -185,55 +183,68 @@
             event.preventDefault();
             const selectedGenre = document.getElementById("genre-select").value;
             fetchBooks(selectedGenre);
+
+            // Show the chart container when the form is submitted
+            document.querySelector(".chart-container").style.display = "block";
         });
 
-        // Function to fetch books from Supabase based on the selected genre
+        // Function to fetch books from the API URL based on the selected genre
         function fetchBooks(genre) {
-            // Use Supabase query to fetch books based on the selected genre
-            supabase
-                .from(genre + "_books") // Assuming you have tables named after genres
-                .select('book_name', 'download_count')
-                .order('download_count', { ascending: false })
-                .limit(5) // Fetch top 5 books
-                .then(({ data, error }) => {
-                    if (error) {
-                        console.error('Error fetching data:', error);
-                        return;
-                    }
+            const apiUrl = `https://dkrtmelljyeyesrteyhf.supabase.co/rest/v1/${genre}_books`;
 
-                    // Extract titles and download counts for the chart
-                    const titles = data.map(book => book.book_name);
-                    const downloadCounts = data.map(book => book.download_count);
-
-                    // Display the chart
-                    displayChart(titles, downloadCounts);
-                });
-        }
-
-        // Function to display the chart
-        function displayChart(titles, downloadCounts) {
-            const ctx = document.getElementById('chartCanvas').getContext('2d');
-            const myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: titles,
-                    datasets: [{
-                        label: 'Download Counts',
-                        data: downloadCounts,
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
+            fetch(apiUrl, {
+                headers: {
+                    'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRrcnRtZWxsanlleWVzcnRleWhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTU1MzUxNTUsImV4cCI6MjAzMTExMTE1NX0.xLDZ3H1Y0sGUC8tVAccJqm5YK2hwtZyWMB_AZD5vb74'
                 }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Extract titles and download counts for the chart
+                const titles = data.map(book => book.book_name);
+                const downloadCounts = data.map(book => book.download_count);
+
+                // Display the chart
+                displayChart(titles, downloadCounts);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
             });
         }
+
+function displayChart(titles, downloadCounts) {
+    const ctx = document.getElementById('chartCanvas').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: titles,
+            datasets: [{
+                label: 'Download Counts',
+                data: downloadCounts,
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                legend: {
+                    display: true,
+                    labels: {
+                        color: 'white' // Set legend text color to white
+                    }
+                }
+            },
+            // Set background color of the chart to white
+            backgroundColor: 'white'
+        }
+    });
+}
+
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.2.2/flickity.pkgd.min.js"></script>
 </body>

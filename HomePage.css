@@ -182,6 +182,14 @@
     object-fit: cover; /* Maintain aspect ratio and cover the cell */
 }
 
+.chart-container {
+    width: 80%; /* Set the width of the chart container */
+    margin: auto; /* Center the chart container horizontally */
+    padding: 20px; /* Add some padding around the chart */
+    background-color: #f9eeee; /* Set the background color of the chart container */
+    border-radius: 10px; /* Add rounded corners to the chart container */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a shadow effect to the chart container */
+}
 
 
   
