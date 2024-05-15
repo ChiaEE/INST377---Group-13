@@ -141,13 +141,12 @@
     margin-bottom: 20px;
 }
 
-/* Book Containers */
 .book-container {
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
-    margin: 20px auto; /* Adjust margin to center horizontally */
-    width: calc(70% - 20px); /* Adjust width as needed */
+    margin: 20px 20px 20px 0; /* Adjust margin to create space on the right and keep them aligned to the left */
+    width: calc(40% - 20px); /* Adjust width as needed */
 }
 
 .book-container h2 {
@@ -182,6 +181,7 @@
     height: 100%; /* Ensure the image fills the cell */
     object-fit: cover; /* Maintain aspect ratio and cover the cell */
 }
+
 
 
   
