@@ -137,15 +137,15 @@
 
 .content {
     display: flex;
-    justify-content: flex-end; /* Align content to the right */
-    align-items: flex-end; /* Align items to the bottom */
+    justify-content: flex-end; 
+    align-items: flex-end; 
     flex-wrap: wrap;
     padding: 20px;
 }
 
 /* Filter Dropdown */
 .filter-container {
-    margin-right: 20px; /* Adjust to create space between items */
+    margin-right: 20px; 
 }
 
 /* Search Bar */
@@ -157,8 +157,8 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
-    margin: 20px 20px 20px 0; /* Adjust margin to create space on the right and keep them aligned to the left */
-    width: calc(40% - 20px); /* Adjust width as needed */
+    margin: 20px 20px 20px 0; 
+    width: calc(40% - 20px); 
 }
 
 .book-container h2 {
@@ -174,34 +174,91 @@
 
 /* Style for carousel container */
 .main-carousel {
-    width: 80%; /* Adjust the width as needed */
-    margin: 0 auto; /* Center the carousel */
+    width: 80%; 
+    margin: 0 auto; 
 }
 
 /* Style for carousel cells */
 .main-carousel .carousel-cell {
-    width: 200px; /* Adjust the width of individual cells */
-    height: 300px; /* Adjust the height of individual cells */
-    margin-right: 10px; /* Adjust the margin between cells */
-    border-radius: 5px; /* Rounded corners for cells */
-    overflow: hidden; /* Hide overflow content */
+    width: 200px; 
+    height: 300px; 
+    margin-right: 10px; 
+    border-radius: 5px; 
+    overflow: hidden; 
 }
 
-/* Style for images inside carousel cells */
+
 .main-carousel img {
-    width: 100%; /* Ensure the image fills the cell */
-    height: 100%; /* Ensure the image fills the cell */
-    object-fit: cover; /* Maintain aspect ratio and cover the cell */
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
 }
 
-.chart-container {
-    width: 80%; /* Set the width of the chart container */
-    margin: auto; /* Center the chart container horizontally */
-    padding: 20px; /* Add some padding around the chart */
-    background-color: #f9eeee; /* Set the background color of the chart container */
-    border-radius: 10px; /* Add rounded corners to the chart container */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a shadow effect to the chart container */
+
+.form-container {
+    margin-top: 20px;
 }
 
+/* Style for the label */
+.form-container label {
+    margin-right: 10px;
+}
+
+/* Style for the select dropdown */
+.form-container select {
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+}
+
+/* Style for the options in the dropdown */
+.form-container select option {
+    background-color: #fff;
+    color: #333;
+}
+
+/* Style for the select dropdown when it's hovered */
+.form-container select:hover {
+    border-color: #226ca1;
+}
+
+
+/* Filter Dropdown */
+.form-container {
+    margin-right: 20px; 
+}
+
+button {
+    padding: 5px 15px;
+    border-radius: 50px;
+    cursor: pointer;
+    border: 0;
+    background-color: white;
+    box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-size: 15px;
+    transition: all 0.5s ease;
+  }
+  
+  button:hover {
+    letter-spacing: 3px;
+    background-color: hsl(225, 71%, 54%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(70, 64, 229) 0px 7px 29px 0px;
+  }
+  
+  button:active {
+    letter-spacing: 3px;
+    background-color: hsl(225, 71%, 54%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(70, 64, 229) 0px 0px 0px 0px;
+    transform: translateY(10px);
+    transition: 100ms;
+  }
+  
 
   

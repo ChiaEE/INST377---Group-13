@@ -149,60 +149,79 @@ window.addEventListener('load', initializeCarousel);
         });
     }
 
-    // Event listener for the genre selection form submission
+    
     document.getElementById("genre-form").addEventListener("submit", function(event) {
         event.preventDefault();
         const selectedGenre = document.getElementById("genre-select").value;
         fetchBooks(selectedGenre);
 
-    // Show the chart container when the form is submitted
+    
         ocument.querySelector(".chart-container").style.display = "block";
     });
 
-    // Function to fetch books from the API URL based on the selected genre
-    function fetchBooks(genre) {
-        const apiUrl = `https://dkrtmelljyeyesrteyhf.supabase.co/rest/v1/${genre}_books`;
 
-        fetch(apiUrl, {
-            headers: {
-                'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRrcnRtZWxsanlleWVzcnRleWhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTU1MzUxNTUsImV4cCI6MjAzMTExMTE1NX0.xLDZ3H1Y0sGUC8tVAccJqm5YK2hwtZyWMB_AZD5vb74'
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Extract titles and download counts for the chart
-            const titles = data.map(book => book.book_name);
-            const downloadCounts = data.map(book => book.download_count);
+function fetchBooks(genre) {
+    const apiUrl = `https://dkrtmelljyeyesrteyhf.supabase.co/rest/v1/${genre}_books`;
 
-            // Display the chart
-            displayChart(titles, downloadCounts);
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-        });
-    }
+    fetch(apiUrl, {
+        headers: {
+            'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRrcnRtZWxsanlleWVzcnRleWhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTU1MzUxNTUsImV4cCI6MjAzMTExMTE1NX0.xLDZ3H1Y0sGUC8tVAccJqm5YK2hwtZyWMB_AZD5vb74'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        
+        const titles = data.map(book => book.book_name);
+        const downloadCounts = data.map(book => book.download_count);
 
-    // Function to display the chart
-    function displayChart(titles, downloadCounts) {
-        const ctx = document.getElementById('chartCanvas').getContext('2d');
-        const myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: titles,
-                datasets: [{
-                    label: 'Most Downloaded',
-                    data: downloadCounts,
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 1
-                }]
+        
+        displayChart(titles, downloadCounts);
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
+    });
+}
+
+
+function displayChart(titles, downloadCounts) {
+    const ctx = document.getElementById('chartCanvas').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: titles,
+            datasets: [{
+                label: 'Most Downloaded',
+                data: downloadCounts,
+                backgroundColor: 'rgba(255, 255, 255, 1)', 
+                borderColor: 'rgba(0, 0, 255, 1)', 
+                borderWidth: 2, 
+                color: 'white'
+            }]
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Book Downloads',
+                    color: 'white', 
+                    font: {
+                        size: 18 
+                    }
+                }
             },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
+            scales: {
+                x: {
+                    ticks: {
+                        color: 'white' 
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: 'white' 
                     }
                 }
             }
-        });
-    }
+        }
+    });
+}
