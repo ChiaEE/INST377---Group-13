@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="HomePage.css">
     <link rel="stylesheet" href="truck.css">
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
 </head>
 <body style="background-color: #226ca1;">
@@ -51,6 +52,24 @@
     <br><br>
 
     <div id="results"></div>
+        <!-- Container for the genre selection form -->
+        <div class="form-container">
+            <form id="genre-form">
+                <label for="genre-select">Select Genre:</label>
+                <select id="genre-select">
+                    <option value="children">Children</option>
+                    <option value="romance">Romance</option>
+                    <option value="nonfiction">Non-Fiction</option>
+                    <!-- Add other genres as needed -->
+                </select>
+                <button type="submit">Show Chart</button>
+            </form>
+        </div>
+        
+        <!-- Container for the chart -->
+        <div class="chart-container">
+            <canvas id="chartCanvas"></canvas>
+        </div>
 
     <!--Slider-->
     <h2 style="text-align: center; color: white;"> Click a Cover to Read the Book!</h2>
@@ -71,58 +90,60 @@
     <script src="Home.js"></script>
     <script>
 
-    function performSearch(event) {
-        event.preventDefault();
+        // Function to perform book search
+        function performSearch(event) {
+            event.preventDefault();
 
-        let searchItem = document.querySelector(".search-input").value;
-        var booksDetails = [];
-        const apiUrlBase = "https://gutendex.com/books";
-        const totalPages = 20; // Set the total number of pages to fetch
+            let searchItem = document.querySelector(".search-input").value;
+            var booksDetails = [];
+            const apiUrlBase = "https://gutendex.com/books";
+            const totalPages = 20; // Set the total number of pages to fetch
 
-        document.getElementById("loading-indicator").style.display = "block";
+            document.getElementById("loading-indicator").style.display = "block";
 
-    // Recursive function to fetch all pages of results
-    function fetchAllPages(page) {
-        const apiUrl = `${apiUrlBase}?page=${page}`;
+            // Recursive function to fetch all pages of results
+            function fetchAllPages(page) {
+                const apiUrl = `${apiUrlBase}?page=${page}`;
 
-        fetch(apiUrl)
-            .then((res) => res.json())
-            .then((res) => {
-                for (var key of Object.keys(res)) {
-                    if (Object.prototype.hasOwnProperty.call(res, key)) {
-                        // If the key is results, we add all the details to the bookDetails Array.
-                        if (key === "results") {
-                            booksDetails.push(...res[key]);
+                fetch(apiUrl)
+                    .then((res) => res.json())
+                    .then((res) => {
+                        for (var key of Object.keys(res)) {
+                            if (Object.prototype.hasOwnProperty.call(res, key)) {
+                                // If the key is results, we add all the details to the bookDetails Array.
+                                if (key === "results") {
+                                    booksDetails.push(...res[key]);
+                                }
+                            }
                         }
-                    }
-                }
 
-                // Check if there are more pages to fetch
-                if (page < totalPages) {
-                    // Fetch the next page recursively
-                    fetchAllPages(page + 1);
-                } else {
-                    // Once all pages are fetched, filter and display results
-                    const searchResults = booksDetails.filter(book => {
-                        return book.title.toLowerCase().includes(searchItem.toLowerCase());
+                        // Check if there are more pages to fetch
+                        if (page < totalPages) {
+                            // Fetch the next page recursively
+                            fetchAllPages(page + 1);
+                        } else {
+                            // Once all pages are fetched, filter and display results
+                            const searchResults = booksDetails.filter(book => {
+                                return book.title.toLowerCase().includes(searchItem.toLowerCase());
+                            });
+
+                            document.getElementById("loading-indicator").style.display = "none";
+
+                            displayResults(searchResults); // Display the search results
+                            filterResults(); 
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching data:', error);
+                        document.getElementById("loading-indicator").style.display = "none";
                     });
+            }
 
-                    document.getElementById("loading-indicator").style.display = "none";
+            // Start fetching from page 1
+            fetchAllPages(1);
+        }
 
-                    displayResults(searchResults); // Display the search results
-                    filterResults(); 
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-                document.getElementById("loading-indicator").style.display = "none";
-            });
-    }
-
-    // Start fetching from page 1
-    fetchAllPages(1);
-}
-
+        // Function to display search results
         function displayResults(searchResults) {
             const resultsContainer = document.getElementById("results");
             resultsContainer.innerHTML = ""; // Clear previous search results
@@ -153,6 +174,7 @@
             });
         }
 
+        // Function to filter search results
         function filterResults() {
             const filterValue = document.getElementById("copyright-filter").value;
             const resultsContainer = document.getElementById("results");
@@ -168,9 +190,65 @@
                 }
             });
         }
+    
+        // Event listener for the genre selection form submission
+        document.getElementById("genre-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const selectedGenre = document.getElementById("genre-select").value;
+            fetchBooks(selectedGenre);
 
+        // Show the chart container when the form is submitted
+            ocument.querySelector(".chart-container").style.display = "block";
+        });
+
+        // Function to fetch books from the API URL based on the selected genre
+        function fetchBooks(genre) {
+            const apiUrl = `https://dkrtmelljyeyesrteyhf.supabase.co/rest/v1/${genre}_books`;
+
+            fetch(apiUrl, {
+                headers: {
+                    'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRrcnRtZWxsanlleWVzcnRleWhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTU1MzUxNTUsImV4cCI6MjAzMTExMTE1NX0.xLDZ3H1Y0sGUC8tVAccJqm5YK2hwtZyWMB_AZD5vb74'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Extract titles and download counts for the chart
+                const titles = data.map(book => book.book_name);
+                const downloadCounts = data.map(book => book.download_count);
+
+                // Display the chart
+                displayChart(titles, downloadCounts);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+        }
+
+        // Function to display the chart
+        function displayChart(titles, downloadCounts) {
+            const ctx = document.getElementById('chartCanvas').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: titles,
+                    datasets: [{
+                        label: 'Most Downloaded',
+                        data: downloadCounts,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
     </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.2.2/flickity.pkgd.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.2.2/flickity.pkgd.min.js"></script>
 </body>
-
+</html>
