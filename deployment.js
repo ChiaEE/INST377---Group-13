@@ -1,15 +1,26 @@
+
+async function validateData() {
+    var bookIDs = [];
+    var data = await fetch("https://gutendex.com/books/")
+    .then((res) => res.json());
+    var results = data.results;
+    bookIDs.push(results);
+    return bookIDs;
+}
+
 // supabase client variables
 const supabaseClient = require("@supabase/supabase-js");
 const bodyParser = require("body-parser");
 const express = require("express");
+console.log(validateData());
 
 const app = express();
-const port = 3000;      // This is the port on which the HTML page runs. 
+const port = 3500;      // This is the port on which the HTML page runs. 
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());         // Integrate the Body Parser in the application. 
 
 let endpoints = ["/HorrorBooks.html", "/MysteryBooks.html", "/NonFictionBooks.html", "/RomanceBooks.html", "/Children'sBooks.html", "/ComedyBooks.html", "/ScienceBooks.html", "/DramaBooks.html"]; // These are all the endpoints that we want to load in Supabase
-
+// Append the items from the HTML pages
 const apiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRrcnRtZWxsanlleWVzcnRleWhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTU1MzUxNTUsImV4cCI6MjAzMTExMTE1NX0.xLDZ3H1Y0sGUC8tVAccJqm5YK2hwtZyWMB_AZD5vb74";
 const supabaseUrl = 'https://dkrtmelljyeyesrteyhf.supabase.co';
 const supabase = supabaseClient.createClient(supabaseUrl, apiKey);
@@ -28,9 +39,9 @@ app.get("/Books", async (req, res) => {
 })
 
 app.post("/Books", async (req, res) => {
-    console.log("req.body");
+    console.log(req.body);
     /* Get all the characteristics of the book such as name, author, subject and ID. */
-    var bookID = req.body.book.id;
+    var bookID = req.body.id;
     var bookName = req.body.book_name;
     var bookAuthor = req.body.book_author;
     var bookSubject = req.body.subject;

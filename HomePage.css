@@ -141,13 +141,12 @@
     margin-bottom: 20px;
 }
 
-/* Book Containers */
 .book-container {
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
-    margin: 20px auto; /* Adjust margin to center horizontally */
-    width: calc(70% - 20px); /* Adjust width as needed */
+    margin: 20px 20px 20px 0; /* Adjust margin to create space on the right and keep them aligned to the left */
+    width: calc(40% - 20px); /* Adjust width as needed */
 }
 
 .book-container h2 {
@@ -181,6 +180,15 @@
     width: 100%; /* Ensure the image fills the cell */
     height: 100%; /* Ensure the image fills the cell */
     object-fit: cover; /* Maintain aspect ratio and cover the cell */
+}
+
+.chart-container {
+    width: 80%; /* Set the width of the chart container */
+    margin: auto; /* Center the chart container horizontally */
+    padding: 20px; /* Add some padding around the chart */
+    background-color: #f9eeee; /* Set the background color of the chart container */
+    border-radius: 10px; /* Add rounded corners to the chart container */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a shadow effect to the chart container */
 }
 
 

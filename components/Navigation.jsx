@@ -8,7 +8,7 @@ function Navigation() {
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/about">About</Link></li>
                 <li><Link to="/comedy-books">Comedy Books</Link></li>
-                <li><Link to="/childrens-books">Children's Books</Link></li>
+                <li><Link to="/childrens-books">Children`s Books</Link></li>
                 <li><Link to="/fiction-books">Fiction Books</Link></li>
                 <li><Link to="/non-fiction-books">Non-Fiction Books</Link></li>
                 <li><Link to="/romance-books">Romance Books</Link></li>

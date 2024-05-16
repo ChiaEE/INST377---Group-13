@@ -19,8 +19,13 @@ This application is dependant on
 
 
 # HOW TO RUN THE APPLICATION
-use `code example` to do something
+Use the search bar to look for specific results. for example, typing `Dracula` in the search bar will return:
+```
+Dracula
+Author: Stoker, Bram
 
+Subjects: Dracula, Count (Fictitious character) -- Fiction, Epistolary fiction, Gothic fiction, Horror tales, Transylvania (Romania) -- Fiction, Vampires -- Fiction, Whitby (England) -- Fiction
+```
 ## testing the application
 code for testing: 
 ```
@@ -40,10 +45,9 @@ two types of get calls are made to Gutendex:
 * The first is in the Homepage, where a request is made after using the search bar. The querry is searched through all 32 pages of the Gutendex for a matching result.
 * The second is a request found in all the genre pages, but it is the same request to Gutendex but with a different search tag, this is by the genre acording to what was listend on the page. Example: the Romance Books page requests the Gutendex to return only Romance books. The Horror Books page requests the Gutendex to return only the list of Horror books.
 
-###  API 2
+###  Chart.js
 
-* example text 1
-* example text 2
+* a single get call is made to obtain the chart that is usesd to display a selection of book covers
 
 ## POST
  ### API 2
@@ -61,10 +65,10 @@ https://gutendex.com/books
 
 https://gutendex.com/books/?page= + pageNum   *(pageNum is a JS variable)* 
 
-## API 2
-sample text
+### Chart.js
+https://cdn.jsdelivr.net/npm/chart.js 
 
-## API 3
+### API 3
 sample text
 
 
