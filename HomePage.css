@@ -231,7 +231,7 @@
     margin-right: 20px; 
 }
 
-button {
+#showChartButton {
     padding: 5px 15px;
     border-radius: 50px;
     cursor: pointer;
@@ -244,14 +244,14 @@ button {
     transition: all 0.5s ease;
   }
   
-  button:hover {
+  #showChartButton:hover {
     letter-spacing: 3px;
     background-color: hsl(225, 71%, 54%);
     color: hsl(0, 0%, 100%);
     box-shadow: rgb(70, 64, 229) 0px 7px 29px 0px;
   }
   
-  button:active {
+  #showChartButton:active {
     letter-spacing: 3px;
     background-color: hsl(225, 71%, 54%);
     color: hsl(0, 0%, 100%);
