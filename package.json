@@ -1,0 +1,25 @@
+{
+  "name": "inst377---group-13",
+  "version": "1.0.0",
+  "description": "Book Database using Gutendex API",
+  "main": "deployment.js",
+  "scripts": {
+    "run": "nodemon -e '*'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChiaEE/INST377---Group-13.git"
+  },
+  "author": "Cyrus Bilpodiwala, Chiamaka Ebulu, Luis Ordonez, Devin Webb, John Hampton III",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChiaEE/INST377---Group-13/issues"
+  },
+  "homepage": "https://github.com/ChiaEE/INST377---Group-13#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.19.2",
+    "node": "^22.2.0"
+  }
+}
