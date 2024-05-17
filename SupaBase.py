@@ -10,7 +10,7 @@ supabase = create_client(supabase_url, supabase_key)
 gutendex_base_url = "https://gutendex.com/books"
 
 
-topic = "science"
+topic = "horror"
 
 
 gutendex_url = f"{gutendex_base_url}?topic={topic}"
@@ -30,7 +30,7 @@ if data.get("results"):
         download_count = book.get("download_count","")
         
         
-        supabase.table("science_books").insert({
+        supabase.table("horror_books").insert({
             "id": book_id,
             "book_name": title,
             "book_author": ", ".join(authors),

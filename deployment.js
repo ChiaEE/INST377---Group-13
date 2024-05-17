@@ -1,18 +1,8 @@
 
-async function validateData() {
-    var bookIDs = [];
-    var data = await fetch("https://gutendex.com/books/")
-    .then((res) => res.json());
-    var results = data.results;
-    bookIDs.push(results);
-    return bookIDs;
-}
-
 // supabase client variables
 const supabaseClient = require("@supabase/supabase-js");
 const bodyParser = require("body-parser");
 const express = require("express");
-console.log(validateData());
 
 const app = express();
 const port = 3500;      // This is the port on which the HTML page runs. 
@@ -25,6 +15,11 @@ const apiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
 const supabaseUrl = 'https://dkrtmelljyeyesrteyhf.supabase.co';
 const supabase = supabaseClient.createClient(supabaseUrl, apiKey);
 
+let fictionBooks = document.getElementById("fictionBooksList");
+console.log(fictionBooks);
+
+
+// This code allows us to get and retrieve books as normal.
 app.get("/Books", async (req, res) => {
     const { data, error } = await supabase
         .from("Books")
