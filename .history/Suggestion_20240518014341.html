@@ -2,7 +2,6 @@
 <head>
     <title>Suggestion</title>
     <link rel="stylesheet" href="HomePage.css">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 </head>
 <body style="background-color: #226ca1;">
     <!-- Header Section -->
@@ -33,16 +32,19 @@
         <form id="user-form">
             <h2>Have a suggestion?</h2>
             <h3>Please fill out at least one!</h3>
-            <label for="title">Title Name:</label>
-            <input type="text" name="title" id="title">
-            <br>
             <label for="author">Author Name:</label>
             <input type="text" id="author" name="author">
             <br>
+            <label for="title">Title Name:</label>
+            <input type="text" name="title" id="title">
+            <br>
             <button type="submit">Submit</button>
-        </form>
-    
-        <div id="confirmation" class="confirmation" style="display: none;">Data submitted successfully! Thank you!</div>
-        <div id="error" class="error" style="display: none;">An error occurred. Please try again.</div>
-    </body>
-    </html>
+          </form>
+
+          <div id="confirmation" class="confirmation">Data submitted successfuly! Thank you!</div>
+          <div id="error" class="error">An error occured. Please try again.</div>
+
+          <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+          <script src="Home.js"></script>
+</body>
+</html>

@@ -237,11 +237,11 @@ document.getElementById('user-form').addEventListener('submit', async function(e
     event.preventDefault();
 
     // Collect form data
-    const book_name = document.getElementById('title').value.trim();
-    const book_author = document.getElementById('author').value.trim();
+    const title = document.getElementById('title').value.trim();
+    const author = document.getElementById('author').value.trim();
 
     // Validate that both author and title fields are filled out
-    if (!book_name || !book_author) {
+    if (!title || !author) {
         alert('Please fill out both the book title and author name.');
         return;
     }
@@ -249,7 +249,7 @@ document.getElementById('user-form').addEventListener('submit', async function(e
     // Insert data into Supabase table
     const { data, error } = await supabase
         .from('book_suggestions')
-        .insert([{ book_name, book_author }]);
+        .insert([{ title, author }]);
 
     if (error) {
         console.error('Error inserting data:', error);

@@ -228,7 +228,7 @@ function displayChart(titles, downloadCounts) {
 
 
 // Suggestion Section
-const SUPABASE_URL = 'https://dkrtmelljyeyesrteyhf.supabase.co';
+const SUPABASE_URL = 'https://dkrtmelljyeyesrteyhf.supabase.co/rest/v1/$book_suggestions`';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRrcnRtZWxsanlleWVzcnRleWhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTU1MzUxNTUsImV4cCI6MjAzMTExMTE1NX0.xLDZ3H1Y0sGUC8tVAccJqm5YK2hwtZyWMB_AZD5vb74';
 const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -237,29 +237,34 @@ document.getElementById('user-form').addEventListener('submit', async function(e
     event.preventDefault();
 
     // Collect form data
-    const book_name = document.getElementById('title').value.trim();
-    const book_author = document.getElementById('author').value.trim();
+    const author = document.getElementById('author').value.trim();
+    const title = document.getElementById('title').value.trim();
 
     // Validate that both author and title fields are filled out
-    if (!book_name || !book_author) {
-        alert('Please fill out both the book title and author name.');
+    if (!author || !title) {
+        alert('Please fill out both the author name and title.');
         return;
     }
 
     // Insert data into Supabase table
     const { data, error } = await supabase
-        .from('book_suggestions')
-        .insert([{ book_name, book_author }]);
+        .from('book_sggestions')
+        .insert([{ author, title }]);
 
-    if (error) {
-        console.error('Error inserting data:', error);
-        document.getElementById('error').style.display = 'block';
-        document.getElementById('confirmation').style.display = 'none';
-    } else {
-        console.log('Data inserted successfully:', data);
-        document.getElementById('confirmation').style.display = 'block';
-        document.getElementById('error').style.display = 'none';
-        // Clear the form
-        document.getElementById('user-form').reset();
-    }
+        if (error) {
+            console.error('Error inserting data:', error);
+            document.getElementById('error').style.display = 'block';
+            document.getElementById('confirmation').style.display = 'none';
+        } else {
+            if (data) {
+                console.log('Data inserted successfully:', data);
+                document.getElementById('confirmation').style.display = 'block';
+                document.getElementById('error').style.display = 'none';
+                // Clear the form
+                document.getElementById('user-form').reset();
+            } else {
+                console.error('No data returned after insertion.');
+                // Handle this case as needed
+            }
+        }
 });
