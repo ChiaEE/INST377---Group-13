@@ -229,15 +229,18 @@ function displayChart(titles, downloadCounts) {
 
 // Handle form submission
 function addSuggestion() {
-
     // Suggestion Section
+    console.log("Adding data to Supabase.");
+    const author = document.getElementById('author').value.trim();
+    const title = document.getElementById('title').value.trim();
+
+    console.log("Title and author: ", author, title);
+    
     const SUPABASE_URL = 'https://kdzfylhqbmswkdqunaph.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtkemZ5bGhxYm1zd2tkcXVuYXBoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTUwNTI3NzIsImV4cCI6MjAzMDYyODc3Mn0.rWUcG3gki3GxXIO_4rtLWquybDdNRZ4pGTArs5eGMh0';
     const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
      // Collect form data
-    console.log("Adding data to Supabase.");
-    const author = document.getElementById('author').value.trim();
-    const title = document.getElementById('title').value.trim();
+    
  
      // Validate that both author and title fields are filled out
     if (!author || !title) {
