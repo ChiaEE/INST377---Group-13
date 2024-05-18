@@ -4,6 +4,9 @@
     <title>Suggestion</title>
     <link rel="stylesheet" href="HomePage.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="Home.js" defer></script>
+
 </head>
 <body style="background-color: #226ca1;">
     <!-- Header Section -->
@@ -30,7 +33,7 @@
     </nav>
 
     <!-- Suggestions -->
-    <form id="user-form">
+    <form id="user-form" name="user-form">
         <h2>Have a suggestion?</h2>
         <h3>Please fill out at least one!</h3>
         <label for="title">Title Name:</label>
@@ -39,63 +42,22 @@
         <label for="author">Author Name:</label>
         <input type="text" id="author" name="author" required>
         <br>
-        <button type="submit">Submit</button>
+        <button type="submit" name="submit">Submit</button>
     </form>
     
     <div id="confirmation" style="display: none;">Data submitted successfully! Thank you!</div>
     <div id="error" style="display: none;">An error occurred. Please try again.</div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Supabase configuration
-            const SUPABASE_URL = 'https://dkrtmelljyeyesrteyhf.supabase.co';
-            const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRrcnRtZWxsanlleWVzcnRleWhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTU1MzUxNTUsImV4cCI6MjAzMTExMTE1NX0.xLDZ3H1Y0sGUC8tVAccJqm5YK2hwtZyWMB_AZD5vb74';
-            const supabase = supabase.createClient({ url: SUPABASE_URL, anonKey: SUPABASE_ANON_KEY });
-
-<<<<<<< HEAD
-          <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-          <script src="Home.js" defer></script>
-=======
-            // Handle form submission
-            document.getElementById('user-form').addEventListener('submit', async function(event) {
-                event.preventDefault();
-
-                // Collect form data
-                const title = document.getElementById('title').value.trim();
-                const author = document.getElementById('author').value.trim();
-                
-                // Validate that all fields are filled out
-                if (!title || !author) {
-                    alert('Please fill out all fields.');
-                    return;
-                }
-
-                // Insert data into Supabase table
-                try {
-                    const { data, error } = await supabase
-                        .from('book_suggestions')
-                        .insert([{ book_name: title, book_author: author }]);
-
-                    if (error) {
-                        throw error;
-                    }
-
-                    console.log('Data inserted successfully:', data);
-                    document.getElementById('confirmation').style.display = 'block';
-                    document.getElementById('error').style.display = 'none';
-                    document.getElementById('user-form').reset();
-                    setTimeout(() => {
-                        document.getElementById('confirmation').style.display = 'none';
-                    }, 3000); 
-                }
-                catch (error) {
-                    console.error('Error inserting data:', error);
-                    document.getElementById('error').style.display = 'block';
-                    document.getElementById('confirmation').style.display = 'none';
-                }
-            });
-        });
+    <script type="text/javascript">
+        // This function retunrs the plaintext of the input passed by user.
+        function obtainFormData() {
+            let bookName = document.getElementById("title").value;
+            let bookAuthor = document.getElementById("author").value;
+            // Put the elements of the form's input into console.
+            console.log("Book Name: ", bookName, "Book Author: ", bookAuthor);
+        }
+       
     </script>
->>>>>>> 765d289ac7dc7fa8634b14528eedbe428dd05306
+          
 </body>
 </html>
