@@ -156,7 +156,7 @@ window.addEventListener('load', initializeCarousel);
         fetchBooks(selectedGenre);
 
     
-        document.querySelector(".chart-container").style.display = "block";
+        ocument.querySelector(".chart-container").style.display = "block";
     });
 
 
@@ -225,13 +225,11 @@ function displayChart(titles, downloadCounts) {
         }
     });
 }
-<<<<<<< HEAD
 
 
-// Suggestion Section
-
-const SUPABASE_URL = 'https://kdzfylhqbmswkdqunaph.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtkemZ5bGhxYm1zd2tkcXVuYXBoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTUwNTI3NzIsImV4cCI6MjAzMDYyODc3Mn0.rWUcG3gki3GxXIO_4rtLWquybDdNRZ4pGTArs5eGMh0';
+// Supabase configuration
+const SUPABASE_URL = 'https://dkrtmelljyeyesrteyhf.supabase.co/rest/v1/book_suggestions';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRrcnRtZWxsanlleWVzcnRleWhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTU1MzUxNTUsImV4cCI6MjAzMTExMTE1NX0.xLDZ3H1Y0sGUC8tVAccJqm5YK2hwtZyWMB_AZD5vb74';
 const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // Handle form submission
@@ -239,38 +237,32 @@ document.getElementById('user-form').addEventListener('submit', async function(e
     event.preventDefault();
 
     // Collect form data
-    const author = document.getElementById('author').value.trim();
     const title = document.getElementById('title').value.trim();
-
-    // Validate that both author and title fields are filled out
-    if (!author || !title) {
-        alert('Please fill out both the author name and title.');
+    const authors = document.getElementById('author').value.trim();
+    
+    // Validate that all fields are filled out
+    if (!title || !authors) {
+        alert('Please fill out all fields.');
         return;
     }
 
     // Insert data into Supabase table
     const { data, error } = await supabase
         .from('book_suggestions')
-        .insert({ title, author});
+        .insert([{
+            book_name: title,
+            book_author: authors
+        }]);
 
-        if (error) {
-            console.error('Error inserting data:', error);
-            document.getElementById('error').style.display = 'block';
-            document.getElementById('confirmation').style.display = 'none';
-        } else {
-            if (data) {
-                console.log('Data inserted successfully:', data);
-                document.getElementById('confirmation').style.display = 'block';
-                document.getElementById('error').style.display = 'none';
-                // Clear the form
-                document.getElementById('user-form').reset();
-            } else {
-                console.error('No data returned after insertion.');
-                // Handle this case as needed
-            }
-        }
-    
-
+    if (error) {
+        console.error('Error inserting data:', error);
+        document.getElementById('error').style.display = 'block';
+        document.getElementById('confirmation').style.display = 'none';
+    } else {
+        console.log('Data inserted successfully:', data);
+        document.getElementById('confirmation').style.display = 'block';
+        document.getElementById('error').style.display = 'none';
+        
+        document.getElementById('user-form').reset();
+    }
 });
-=======
->>>>>>> 765d289ac7dc7fa8634b14528eedbe428dd05306

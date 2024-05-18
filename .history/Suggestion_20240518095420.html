@@ -52,10 +52,6 @@
             const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRrcnRtZWxsanlleWVzcnRleWhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTU1MzUxNTUsImV4cCI6MjAzMTExMTE1NX0.xLDZ3H1Y0sGUC8tVAccJqm5YK2hwtZyWMB_AZD5vb74';
             const supabase = supabase.createClient({ url: SUPABASE_URL, anonKey: SUPABASE_ANON_KEY });
 
-<<<<<<< HEAD
-          <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-          <script src="Home.js" defer></script>
-=======
             // Handle form submission
             document.getElementById('user-form').addEventListener('submit', async function(event) {
                 event.preventDefault();
@@ -86,7 +82,7 @@
                     document.getElementById('user-form').reset();
                     setTimeout(() => {
                         document.getElementById('confirmation').style.display = 'none';
-                    }, 3000); 
+                    }, 3000); // Hide confirmation after 3 seconds
                 }
                 catch (error) {
                     console.error('Error inserting data:', error);
@@ -96,6 +92,5 @@
             });
         });
     </script>
->>>>>>> 765d289ac7dc7fa8634b14528eedbe428dd05306
 </body>
 </html>

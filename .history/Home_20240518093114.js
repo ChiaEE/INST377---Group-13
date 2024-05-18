@@ -156,7 +156,7 @@ window.addEventListener('load', initializeCarousel);
         fetchBooks(selectedGenre);
 
     
-        document.querySelector(".chart-container").style.display = "block";
+        ocument.querySelector(".chart-container").style.display = "block";
     });
 
 
@@ -225,52 +225,3 @@ function displayChart(titles, downloadCounts) {
         }
     });
 }
-<<<<<<< HEAD
-
-
-// Suggestion Section
-
-const SUPABASE_URL = 'https://kdzfylhqbmswkdqunaph.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtkemZ5bGhxYm1zd2tkcXVuYXBoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTUwNTI3NzIsImV4cCI6MjAzMDYyODc3Mn0.rWUcG3gki3GxXIO_4rtLWquybDdNRZ4pGTArs5eGMh0';
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-// Handle form submission
-document.getElementById('user-form').addEventListener('submit', async function(event) {
-    event.preventDefault();
-
-    // Collect form data
-    const author = document.getElementById('author').value.trim();
-    const title = document.getElementById('title').value.trim();
-
-    // Validate that both author and title fields are filled out
-    if (!author || !title) {
-        alert('Please fill out both the author name and title.');
-        return;
-    }
-
-    // Insert data into Supabase table
-    const { data, error } = await supabase
-        .from('book_suggestions')
-        .insert({ title, author});
-
-        if (error) {
-            console.error('Error inserting data:', error);
-            document.getElementById('error').style.display = 'block';
-            document.getElementById('confirmation').style.display = 'none';
-        } else {
-            if (data) {
-                console.log('Data inserted successfully:', data);
-                document.getElementById('confirmation').style.display = 'block';
-                document.getElementById('error').style.display = 'none';
-                // Clear the form
-                document.getElementById('user-form').reset();
-            } else {
-                console.error('No data returned after insertion.');
-                // Handle this case as needed
-            }
-        }
-    
-
-});
-=======
->>>>>>> 765d289ac7dc7fa8634b14528eedbe428dd05306

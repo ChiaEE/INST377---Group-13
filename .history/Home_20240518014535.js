@@ -156,7 +156,7 @@ window.addEventListener('load', initializeCarousel);
         fetchBooks(selectedGenre);
 
     
-        document.querySelector(".chart-container").style.display = "block";
+        ocument.querySelector(".chart-container").style.display = "block";
     });
 
 
@@ -225,11 +225,9 @@ function displayChart(titles, downloadCounts) {
         }
     });
 }
-<<<<<<< HEAD
 
 
 // Suggestion Section
-
 const SUPABASE_URL = 'https://kdzfylhqbmswkdqunaph.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtkemZ5bGhxYm1zd2tkcXVuYXBoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTUwNTI3NzIsImV4cCI6MjAzMDYyODc3Mn0.rWUcG3gki3GxXIO_4rtLWquybDdNRZ4pGTArs5eGMh0';
 const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -250,8 +248,8 @@ document.getElementById('user-form').addEventListener('submit', async function(e
 
     // Insert data into Supabase table
     const { data, error } = await supabase
-        .from('book_suggestions')
-        .insert({ title, author});
+        .from('book_sggestions')
+        .insert([{ author, title }]);
 
         if (error) {
             console.error('Error inserting data:', error);
@@ -269,8 +267,4 @@ document.getElementById('user-form').addEventListener('submit', async function(e
                 // Handle this case as needed
             }
         }
-    
-
 });
-=======
->>>>>>> 765d289ac7dc7fa8634b14528eedbe428dd05306

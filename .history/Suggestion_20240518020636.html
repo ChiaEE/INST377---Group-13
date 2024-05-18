@@ -1,0 +1,48 @@
+<html>
+<head>
+    <title>Suggestion</title>
+    <link rel="stylesheet" href="HomePage.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+</head>
+<body style="background-color: #226ca1;">
+    <!-- Header Section -->
+    <header id="bar">
+        <h1>Have a suggestion?</h1>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav id="main-nav">
+        <ul id="navList">
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="About_page.html">ABOUT</a></li>
+            <li id="childrensBooksLink"><a href="Children'sBooks.html">Children's Books</a></li>
+            <li id="fictionBooksLink"><a href="FictionBooks.html">Fiction Books</a></li>
+            <li id="nonFictionBooks"><a href="NonFictionBooks.html"> Non-Fiction Books </a></li>
+            <li id="comedyBooksLink"><a href="ComedyBooks.html">Comedy Books</a></li>
+            <li id="romanceBooksLink"><a href="RomanceBooks.html">Romance Books</a></li>
+            <li id="dramaBooksLink"><a href="DramaBooks.html">Drama Books</a></li>
+            <li id="sciBooksLink"><a href="ScienceBooks.html">Science Books</a></li>
+            <li id="horrorBooksLink"><a href="HorrorBooks.html">Horror Books</a></li>
+            <li id="mysteryBooksLink"><a href="MysteryBooks.html">Mystery Books</a></li>
+            <li id="SuggestionsLink"><a href="Suggestion.html">Suggestion?</a></li>
+ 
+        </ul>
+    </nav>
+
+        <!--Suggestions-->
+        <form id="user-form">
+            <h2>Have a suggestion?</h2>
+            <h3>Please fill out at least one!</h3>
+            <label for="title">Title Name:</label>
+            <input type="text" name="title" id="title">
+            <br>
+            <label for="author">Author Name:</label>
+            <input type="text" id="author" name="author">
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+    
+        <div id="confirmation" class="confirmation" style="display: none;">Data submitted successfully! Thank you!</div>
+        <div id="error" class="error" style="display: none;">An error occurred. Please try again.</div>
+    </body>
+    </html>
