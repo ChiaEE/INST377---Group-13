@@ -93,4 +93,4 @@ https://dkrtmelljyeyesrteyhf.supabase.co/rest/v1/${genre}_books`  *${genre} is f
 known bugs:
 no known bugs at this time
 # FUTURE DEVELOPMENT FOR THIS PROJECT
-write more later
+In the future, this project could include more books, genres, and further enhanced search features. With more tools at use, the value of this website would increase signifcantly. 
