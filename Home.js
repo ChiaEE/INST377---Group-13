@@ -1,3 +1,10 @@
+
+// supabase initialize
+const supabaseUrl = "https://dkrtmelljyeyesrteyhf.supabase.co";
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRrcnRtZWxsanlleWVzcnRleWhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTU1MzUxNTUsImV4cCI6MjAzMTExMTE1NX0.xLDZ3H1Y0sGUC8tVAccJqm5YK2hwtZyWMB_AZD5vb74";
+const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+
 function fetchRandomBooks() {
     return fetch("https://gutendex.com/books")
         .then(response => response.json())
@@ -270,4 +277,29 @@ async function addSuggestion() {
 
 
 // document.getElementById('user-form').addEventListener('submit', addSuggestion);
+function addToSupabase(event) {
+    event.preventDefault();
+
+    const title = document.getElementById('title').value;
+    const author = document.getElementById('author').value;
+
+    // Insert data into Supabase
+    supabase
+        .from('suggestions')
+        .insert([
+            { title: title, author: author }
+        ])
+        .then(({ data, error }) => {
+            if (error) {
+                console.error('Error inserting data:', error);
+                document.getElementById('error').style.display = 'block';
+                document.getElementById('confirmation').style.display = 'none';
+            } else {
+                document.getElementById('confirmation').style.display = 'block';
+                document.getElementById('error').style.display = 'none';
+                document.getElementById('user-form').reset();
+            }
+        });
+}
+document.getElementById('user-form').addEventListener('submit', addToSupabase);
 
