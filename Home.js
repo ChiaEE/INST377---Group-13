@@ -311,4 +311,7 @@ function getBookName() {
     console.log(document.getElementById("title").value);
 }
 
-window.onload = getAuthorName, getBookName;
+window.onload = () => {
+    getAuthorName();
+    getBookName();
+};
