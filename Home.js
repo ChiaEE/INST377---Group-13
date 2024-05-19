@@ -226,52 +226,57 @@ function displayChart(titles, downloadCounts) {
     });
 }
 
-
 // Handle form submission
-function addSuggestion() {
-    // Suggestion Section
-    console.log("Adding data to Supabase.");
-    const author = document.getElementById('author').value.trim();
-    const title = document.getElementById('title').value.trim();
+// const supabaseClient = require("@supabase/supabase-js");
+// const bodyParser = require("body-parser");
+// const express = require("express");
+// let author = document.getElementById('author').innerText.trim();
+// let title = document.getElementById('title').innerText.trim();
 
-    console.log("Title and author: ", author, title);
+// function addSuggestion() {
+//     console.log("Adding data to Supabase.");
+//     const author = document.getElementById('author').innerText.trim();
+//     const title = document.getElementById('title').innerText.trim();
+//     console.log("Title and author: ", author, title);
+//     // Collect form data
     
-    const SUPABASE_URL = 'https://kdzfylhqbmswkdqunaph.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtkemZ5bGhxYm1zd2tkcXVuYXBoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTUwNTI3NzIsImV4cCI6MjAzMDYyODc3Mn0.rWUcG3gki3GxXIO_4rtLWquybDdNRZ4pGTArs5eGMh0';
-    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-     // Collect form data
-    
- 
-     // Validate that both author and title fields are filled out
-    if (!author || !title) {
-        alert('Please fill out both the author name and title.');
-        return;
-    }
+//     // Validate that both author and title fields are filled out
+//     if (!author || !title) {
+//         alert('Please fill out both the author name and title.');
+//         return;
+//     }
      
-     // Insert data into Supabase table
-     const { data, error } = supabase
-         .from('book_suggestions')
-         .insert({ title, author});
+//      // Insert data into Supabase table
+//      const { data, error } = supabase
+//          .from('book_suggestions')
+//          .insert({ book_name: title, book_author: author });
      
-         if (error) {
-             console.error('Error inserting data:', error);
-             document.getElementById('error').style.display = 'block';
-             document.getElementById('confirmation').style.display = 'none';
-         } else {
-             if (data) {
-                 console.log('Data inserted successfully:', data);
-                 document.getElementById('confirmation').style.display = 'block';
-                 document.getElementById('error').style.display = 'none';
-                 // Clear the form
-                 document.getElementById('user-form').reset();
-             } else {
-                 console.error('No data returned after insertion.');
-                 // Handle this case as needed
-             }
-         }
+//          if (error) {
+//              console.error('Error inserting data:', error);
+//              document.getElementById('error').style.display = 'block';
+//              document.getElementById('confirmation').style.display = 'none';
+//          } else {
+//              if (data) {
+//                  console.log('Data inserted successfully:', data);
+//                  document.getElementById('confirmation').style.display = 'block';
+//                  document.getElementById('error').style.display = 'none';
+//                  // Clear the form
+//                  document.getElementById('user-form').reset();
+//              } else {
+//                  console.error('No data returned after insertion.');
+//                  // Handle this case as needed
+//              }
+//          }
+// }
+
+// document.getElementById('user-form').addEventListener('submit', addSuggestion);
+
+function getAuthorName() {
+    console.log(document.getElementById("author").value);
 }
 
-document.getElementById('user-form').addEventListener('submit', addSuggestion);
+function getBookName() {
+    console.log(document.getElementById("title").value);
+}
 
-
-
+window.onload = getAuthorName, getBookName;

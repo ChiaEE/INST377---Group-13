@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="HomePage.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script src="Home.js" defer></script>
-
+    <script src="deployment.js" defer></script>
 </head>
 <body style="background-color: #226ca1;">
     <!-- Header Section -->
@@ -32,7 +32,7 @@
     </nav>
 
     <!-- Suggestions -->
-    <form id="user-form" name="user-form">
+    <form id="user-form" name="user-form" onsubmit="return addToSupabase();">
         <h2>Have a suggestion?</h2>
         <h3>Please fill out at least one!</h3>
         <label for="title">Title Name:</label>
@@ -46,17 +46,6 @@
     
     <div id="confirmation" style="display: none;">Data submitted successfully! Thank you!</div>
     <div id="error" style="display: none;">An error occurred. Please try again.</div>
-
-    <script type="text/javascript">
-        // This function retunrs the plaintext of the input passed by user.
-        function obtainFormData() {
-            let bookName = document.getElementById("title").innerText;
-            let bookAuthor = document.getElementById("author").innerText;
-            // Put the elements of the form's input into console.
-            console.log("Book Name: ", bookName, "Book Author: ", bookAuthor);
-        }
-       
-    </script>
           
 </body>
 </html>
