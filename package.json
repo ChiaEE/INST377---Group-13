@@ -2,7 +2,7 @@
   "name": "inst377---group-13",
   "version": "1.0.0",
   "description": "Book Database using Gutendex API",
-  "main": "deployment.js",
+  "main": "index.js",
   "scripts": {
     "start": "nodemon -e '*'",
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -13,10 +13,12 @@ const apiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
 const supabaseUrl = 'https://dkrtmelljyeyesrteyhf.supabase.co';
 const supabase = supabaseClient.createClient(supabaseUrl, apiKey);
 
+app.get('/', (req, res) => {
+    res.sendFile('Suggestion.html', {root:__dirname})
+})
+
 var endpoint = "/book_suggestions";
 // This code allows us to get and retrieve books as normal.
-
-
 app.get(endpoint, async (req, res) => {
     const { data, error } = await supabase
         .from("book_suggestions")
@@ -53,33 +55,3 @@ app.listen(port, () => {
     console.log("App is Created!");
     
 });
-
-async function addToSupabase() {
-    // Get the data from the Suggestion.html form.
-    const bookName = document.getElementById("title").innerHTML;
-    const bookAuthor = document.getElementById("author").innerHTML;
-    console.log("Book Author and name: ", bookAuthor, bookName);
-
-    // Insert the columns in the Supabase table.
-    const { data, error } = await supabase
-        .from('book_suggestions')
-        .insert({ book_name: bookName, book_author: bookAuthor })
-    .select();
-
-    if(error) {
-        console.error('Error inserting data:', error);
-        document.getElementById('error').style.display = 'block';
-        document.getElementById('confirmation').style.display = 'none';
-    } else {
-        if (data) {
-            console.log('Data inserted successfully:', data);
-            document.getElementById('confirmation').style.display = 'block';
-            document.getElementById('error').style.display = 'none';
-            // Clear the form
-            document.getElementById('user-form').reset();
-        } else {
-            console.error('No data returned after insertion.');
-            // Handle this case as needed
-        }
-    }
-}

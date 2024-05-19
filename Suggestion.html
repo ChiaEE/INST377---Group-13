@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="HomePage.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script src="Home.js" defer></script>
-    <script src="deployment.js" defer></script>
 </head>
 <body style="background-color: #226ca1;">
     <!-- Header Section -->
@@ -31,8 +30,8 @@
         </ul>
     </nav>
 
-    <!-- Suggestions -->
-    <form id="user-form" name="user-form" onsubmit="return addToSupabase();">
+    <!-- Suggestions' onsubmit function is not working. -->
+    <form id="user-form" name="user-form">
         <h2>Have a suggestion?</h2>
         <h3>Please fill out at least one!</h3>
         <label for="title">Title Name:</label>
@@ -41,7 +40,7 @@
         <label for="author">Author Name:</label>
         <input type="text" id="author" name="author" required>
         <br>
-        <button type="submit" name="submitButton" id="submitButton">Submit</button>
+        <button type="submit" name="submitButton" id="submitButton" onclick="addSuggestion(); return false">Submit</button>
     </form>
     
     <div id="confirmation" style="display: none;">Data submitted successfully! Thank you!</div>

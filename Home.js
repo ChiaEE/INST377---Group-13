@@ -227,56 +227,47 @@ function displayChart(titles, downloadCounts) {
 }
 
 // Handle form submission
-// const supabaseClient = require("@supabase/supabase-js");
-// const bodyParser = require("body-parser");
-// const express = require("express");
-// let author = document.getElementById('author').innerText.trim();
-// let title = document.getElementById('title').innerText.trim();
+const author = document.getElementById('author').innerText.trim();
+const title = document.getElementById('title').innerText.trim();
 
-// function addSuggestion() {
-//     console.log("Adding data to Supabase.");
-//     const author = document.getElementById('author').innerText.trim();
-//     const title = document.getElementById('title').innerText.trim();
-//     console.log("Title and author: ", author, title);
-//     // Collect form data
+async function addSuggestion() {
+    console.log("Adding data to Supabase.");
+    const author = document.getElementById('author').value.trim();
+    const title = document.getElementById('title').value.trim();
+    console.log("Title and author: ", author, title);
+    // Collect form data
     
-//     // Validate that both author and title fields are filled out
-//     if (!author || !title) {
-//         alert('Please fill out both the author name and title.');
-//         return;
-//     }
-     
-//      // Insert data into Supabase table
-//      const { data, error } = supabase
-//          .from('book_suggestions')
-//          .insert({ book_name: title, book_author: author });
-     
-//          if (error) {
-//              console.error('Error inserting data:', error);
-//              document.getElementById('error').style.display = 'block';
-//              document.getElementById('confirmation').style.display = 'none';
-//          } else {
-//              if (data) {
-//                  console.log('Data inserted successfully:', data);
-//                  document.getElementById('confirmation').style.display = 'block';
-//                  document.getElementById('error').style.display = 'none';
-//                  // Clear the form
-//                  document.getElementById('user-form').reset();
-//              } else {
-//                  console.error('No data returned after insertion.');
-//                  // Handle this case as needed
-//              }
-//          }
-// }
+    // Validate that both author and title fields are filled out
+    if (!author || !title) {
+        alert('Please fill out both the author name and title.');
+        return;
+    }
+    var test = await fetch("http://localhost:3500/book_suggestions", {
+        method: 'POST',
+        body: JSON.stringify({
+            "book_name": `${title}`,
+            "book_author": `${author}`
+        }),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    })
+    .then((res) => {
+        console.log(res.status);
+        if(res.status != 200 && res.status != 304) {
+            throw new Error(JSON.stringify(res.json()))
+        } else {
+            res.json();
+        }
+    })
+    .catch((error) => {
+        document.getElementById("error").setAttribute('display', 'block');
+        return false;
+    })
+    await test; 
+}
+
+
 
 // document.getElementById('user-form').addEventListener('submit', addSuggestion);
 
-function getAuthorName() {
-    console.log(document.getElementById("author").value);
-}
-
-function getBookName() {
-    console.log(document.getElementById("title").value);
-}
-
-window.onload = getAuthorName, getBookName;
