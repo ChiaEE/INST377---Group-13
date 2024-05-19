@@ -87,7 +87,8 @@ https://cdn.jsdelivr.net/npm/chart.js
 ### Custom API
 https://dkrtmelljyeyesrteyhf.supabase.co/rest/v1/${genre}_books`  *${genre} is from the function parameter*
 
-
+## POST
+a post request is made to update the database with new entries
 
 # BUG HUNT
 known bugs:
