@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="HomePage.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script src="Home.js" defer></script>
-    <script src="deployment.js" defer></script>
 </head>
 <body style="background-color: #226ca1;">
     <!-- Header Section -->
@@ -32,7 +31,7 @@
     </nav>
 
     <!-- Suggestions -->
-    <form id="user-form" name="user-form" onsubmit="return addToSupabase();">
+    <form id="user-form" name="user-form" onsubmit="return addToSupabase(event);">
         <h2>Have a suggestion?</h2>
         <h3>Please fill out at least one!</h3>
         <label for="title">Title Name:</label>
