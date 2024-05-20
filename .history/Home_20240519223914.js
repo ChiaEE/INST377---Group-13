@@ -76,17 +76,17 @@ window.addEventListener('load', initializeCarousel);
 
                     
                     if (page < totalPages) {
-                        
+                        // Fetch the next page recursively
                         fetchAllPages(page + 1);
                     } else {
-                        
+                        // Once all pages are fetched, filter and display results
                         const searchResults = booksDetails.filter(book => {
                             return book.title.toLowerCase().includes(searchItem.toLowerCase());
                         });
 
                         document.getElementById("loading-indicator").style.display = "none";
 
-                        displayResults(searchResults); 
+                        displayResults(searchResults); // Display the search results
                         filterResults(); 
                     }
                 })
@@ -96,22 +96,22 @@ window.addEventListener('load', initializeCarousel);
                 });
         }
 
-        
+        // Start fetching from page 1
         fetchAllPages(1);
     }
 
     // Function to display search results
     function displayResults(searchResults) {
         const resultsContainer = document.getElementById("results");
-        resultsContainer.innerHTML = ""; 
+        resultsContainer.innerHTML = ""; // Clear previous search results
 
         searchResults.forEach(book => {
-            
+            // Create a container for each book
             const bookContainer = document.createElement("div");
             bookContainer.classList.add("book-container");
-            bookContainer.setAttribute("data-copyright", book.copyright); 
+            bookContainer.setAttribute("data-copyright", book.copyright); // Add copyright attribute
 
-           
+            // Create elements for title, author, and subjects
             const titleElement = document.createElement("h2");
             titleElement.textContent = book.title;
 
@@ -121,17 +121,17 @@ window.addEventListener('load', initializeCarousel);
             const subjectsElement = document.createElement("p");
             subjectsElement.textContent = "Subjects: " + book.subjects.join(", ");
 
-            
+            // Append elements to the book container
             bookContainer.appendChild(titleElement);
             bookContainer.appendChild(authorElement);
             bookContainer.appendChild(subjectsElement);
 
-            
+            // Append the book container to the results container
             resultsContainer.appendChild(bookContainer);
         });
     }
 
-    
+    // Function to filter search results
     function filterResults() {
         const filterValue = document.getElementById("copyright-filter").value;
         const resultsContainer = document.getElementById("results");
