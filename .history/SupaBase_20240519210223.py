@@ -1,8 +1,6 @@
 import requests
 from supabase_py import create_client
 
-### Replace name of Genre and run code to populate supabase database
-
 supabase_url = "https://dkrtmelljyeyesrteyhf.supabase.co"
 supabase_key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRrcnRtZWxsanlleWVzcnRleWhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTU1MzUxNTUsImV4cCI6MjAzMTExMTE1NX0.xLDZ3H1Y0sGUC8tVAccJqm5YK2hwtZyWMB_AZD5vb74"
 supabase = create_client(supabase_url, supabase_key)

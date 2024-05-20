@@ -1,14 +1,12 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <title>Fiction Books</title>
+    <title>Drama Books</title>
     <link rel="stylesheet" href="HomePage.css">
-    <script src="deployment.js" defer></script>
 </head>
 <body style="background-color: #226ca1;">
     <!-- Header Section -->
     <header id="bar">
-        <h1>Fiction Books</h1>
+        <h1>Drama Books</h1>
     </header>
 
     <!-- Navigation Menu -->
@@ -30,21 +28,21 @@
         </ul>
     </nav>
 
-  
-    <div id="fictionBooksList">
+
+    <div id="dramaBooksList">
         <div id="loadingIndicator" style="display: none;">Loading books...</div>
     </div>
 
     <!-- JavaScript -->
     <script>
-       document.addEventListener("DOMContentLoaded", function () {
-    fetchBooks("fictionBooksList"); 
+        document.addEventListener("DOMContentLoaded", function () {
+    fetchBooks("dramaBooksList"); 
 });
 
 function fetchBooks(containerId) {
     var topic = containerId.replace("BooksList", "").toLowerCase();
     var loadingElement = document.getElementById('loadingIndicator');
-    loadingElement.style.display = 'block'; 
+    loadingElement.style.display = 'block'; // Show the loading indicator
 
     fetch("https://gutendex.com/books?topic=" + topic)
         .then(response => {
@@ -60,7 +58,7 @@ function fetchBooks(containerId) {
             console.error('There was a problem with the fetch operation:', error);
         })
         .finally(() => {
-            loadingElement.style.display = 'none'; 
+            loadingElement.style.display = 'none'; // Hide the loading indicator
         });
 }
 

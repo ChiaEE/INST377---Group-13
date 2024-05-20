@@ -41,7 +41,7 @@
       
         function fetchBooks(containerId) {
           var loadingElement = document.getElementById('loadingIndicator');
-          loadingElement.style.display = 'block'; 
+          loadingElement.style.display = 'block'; // Show the loading indicator
       
           fetch("https://gutendex.com/books?topic=horror")
             .then(response => {
@@ -57,7 +57,7 @@
               console.error('There was a problem with the fetch operation:', error);
             })
             .finally(() => {
-              loadingElement.style.display = 'none'; 
+              loadingElement.style.display = 'none'; // Hide the loading indicator
             });
         }
       
@@ -71,7 +71,7 @@
             var ul = document.createElement("ul");
             books.forEach(function (book) {
               var title = book.title;
-              var author = book.authors[0].name; 
+              var author = book.authors[0].name; // Corrected line
               var bookLink = book.formats["text/html"];
       
               var li = document.createElement("li");
