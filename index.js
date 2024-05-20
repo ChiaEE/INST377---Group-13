@@ -54,8 +54,4 @@ app.post(endpoint, async (req, res) => {
 app.listen(port, () => {
     console.log("App is Created!");
     
-<<<<<<< HEAD:index.js
 });
-=======
-});
->>>>>>> c00fccc9e27ffd2fb32a300c27cde422ba6cc728:deployment.js

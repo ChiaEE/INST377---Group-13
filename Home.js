@@ -233,6 +233,50 @@ function displayChart(titles, downloadCounts) {
     });
 }
 
+async function loadBookData() {
+    var test = await fetch('http://localhost:3500/book_suggestions')
+        .then((res) => res.json())
+        .then((res) => {
+            console.log(res)
+            const element = document.getElementById("dataOnBooks");
+            if (element) {
+                element.remove();
+            }
+
+            var table = document.createElement('table');
+            table.setAttribute('id', 'dataOnBooks')
+
+            var tableRow = document.createElement('tr');
+
+            var tableHeading1 = document.createElement('th');
+            tableHeading1.innerHTML = "Book Name"
+            tableRow.appendChild(tableHeading1)
+
+            var tableHeading2 = document.createElement('th');
+            tableHeading2.innerHTML = "Author Name"
+            tableRow.appendChild(tableHeading2)
+
+            table.appendChild(tableRow)
+            var cutoff = document.getElementById('dataOnBooks');
+            cutoff.insertAdjacentElement("beforebegin", table)
+            for (var i = 0; i < res.length; i++) {
+                var bookRow = document.createElement('tr');
+                var bookName = document.createElement('td');
+                var bookAuthor = document.createElement('td');
+
+                bookName.innerHTML = res[i].book_name;
+                bookAuthor.innerHTML = res[i].book_author;
+
+                bookRow.appendChild(bookName);
+                bookRow.appendChild(bookAuthor);
+
+                table.appendChild(bookRow);
+            }
+        })
+}
+
+
+
 // Handle form submission
 const author = document.getElementById('author').innerText.trim();
 const title = document.getElementById('title').innerText.trim();
@@ -259,47 +303,11 @@ async function addSuggestion() {
             "Content-type": "application/json; charset=UTF-8"
         }
     })
+    .then((res) => res.json())
     .then((res) => {
-        console.log(res.status);
-        if(res.status != 200 && res.status != 304) {
-            throw new Error(JSON.stringify(res.json()))
-        } else {
-            res.json();
-        }
+
     })
-    .catch((error) => {
-        document.getElementById("error").setAttribute('display', 'block');
-        return false;
-    })
-    await test; 
+    await loadBookData; 
 }
 
-
-
-// document.getElementById('user-form').addEventListener('submit', addSuggestion);
-function addToSupabase(event) {
-    event.preventDefault();
-
-    const title = document.getElementById('title').value;
-    const author = document.getElementById('author').value;
-
-    // Insert data into Supabase
-    supabase
-        .from('suggestions')
-        .insert([
-            { title: title, author: author }
-        ])
-        .then(({ data, error }) => {
-            if (error) {
-                console.error('Error inserting data:', error);
-                document.getElementById('error').style.display = 'block';
-                document.getElementById('confirmation').style.display = 'none';
-            } else {
-                document.getElementById('confirmation').style.display = 'block';
-                document.getElementById('error').style.display = 'none';
-                document.getElementById('user-form').reset();
-            }
-        });
-}
-document.getElementById('user-form').addEventListener('submit', addToSupabase);
 
