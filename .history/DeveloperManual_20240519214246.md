@@ -82,13 +82,7 @@ https://gutendex.com/books
 https://gutendex.com/books/?page= + pageNum   *(pageNum is a JS variable)* 
 
 ### Chart.js
-Main Link: https://cdn.jsdelivr.net/npm/chart.js 
-
-Endpoint Used from our Database: https://dkrtmelljyeyesrteyhf.supabase.co/rest/v1/${genre}_books
-
-### Flickity Slider library
-Main Link: https://cdnjs.cloudflare.com/ajax/libs/flickity/2.2.2/flickity.pkgd.min.js
-Endpoint Used: https://gutendex.com/books
+https://cdn.jsdelivr.net/npm/chart.js 
 
 ### Custom API
 https://dkrtmelljyeyesrteyhf.supabase.co/rest/v1/${genre}_books`  *${genre} is from the function parameter*
