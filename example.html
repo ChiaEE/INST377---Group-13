@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Navigation</title>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    // Define the NavigationBar component
+    function NavigationBar() {
+      const [subjects, setSubjects] = React.useState([]);
+
+      React.useEffect(() => {
+        // Fetch subjects from Gutendex API
+        axios.get('https://gutendex.com/books?topic=')
+          .then(response => {
+            // Extract subjects from the API response
+            const booksData = response.data.results;
+            const subjectsData = booksData.flatMap(book => book.subjects);
+            // Deduplicate subjects
+            const uniqueSubjects = Array.from(new Set(subjectsData));
+            setSubjects(uniqueSubjects);
+          })
+          .catch(error => {
+            console.error('Error fetching subjects:', error);
+          });
+      }, []);
+
+      return (
+        <nav style={{ overflowY: 'auto', maxHeight: '200px' }}>
+          <ul>
+            {subjects.map((subject, index) => (
+              <li key={index}>
+                <a href={`#${subject}`}>{subject}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      );
+    }
+
+    // Render the NavigationBar component
+    ReactDOM.render(<NavigationBar />, document.getElementById('root'));
+  </script>
+</body>
+</html>

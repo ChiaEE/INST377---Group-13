@@ -12,9 +12,9 @@ This application is dependant on
 * the gutendex database web API
 *  integration of the RESTful web API
 * an API endpoint from our SQL database
-* a custom API that connects with supabase 
+* ~~ANOTHER BACKEND API WRITE THIS LATER~~
 
-***more detailed information on the APIs used can be found in the API section below***
+***more detailed information on the API's used can be found in the API section below***
 
 
 
@@ -26,33 +26,14 @@ Author: Stoker, Bram
 
 Subjects: Dracula, Count (Fictitious character) -- Fiction, Epistolary fiction, Gothic fiction, Horror tales, Transylvania (Romania) -- Fiction, Vampires -- Fiction, Whitby (England) -- Fiction
 ```
-# USING OUR API
-copy the following code into your project to get started: 
+## testing the application
+code for testing: 
 ```
-function fetchBooks(genre) {
-    const apiUrl = `https://dkrtmelljyeyesrteyhf.supabase.co/rest/v1/${genre}_books`;
-
-    fetch(apiUrl, {
-        headers: {
-            'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRrcnRtZWxsanlleWVzcnRleWhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTU1MzUxNTUsImV4cCI6MjAzMTExMTE1NX0.xLDZ3H1Y0sGUC8tVAccJqm5YK2hwtZyWMB_AZD5vb74'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        
-        const titles = data.map(book => book.book_name);
-        const downloadCounts = data.map(book => book.download_count);
-
-        
-        displayChart(titles, downloadCounts);
-    })
-    .catch(error => {
-        console.error('Error fetching data:', error);
-    });
-}
-
+this is where the code will go 
+so the user can
+copy and paste
+and run easiliy
 ```
-this will allow you to connect to the supabase. 
 
 # FULL API RUNDOWN
 This is the rundown of all the api interactions in this application:
@@ -68,9 +49,12 @@ two types of get calls are made to Gutendex:
 
 * a single get call is made to obtain the chart that is usesd to display a selection of book covers
 
-### custom API
-a call is made to fetch the books from the genre of choice from the supabase
-
+## POST
+ ### API 2
+ * example text 1
+ * example text 2
+## PATCH
+write this later
 ## ENDPOINTS
 ### Gutendex:  
 
@@ -84,14 +68,13 @@ https://gutendex.com/books/?page= + pageNum   *(pageNum is a JS variable)*
 ### Chart.js
 https://cdn.jsdelivr.net/npm/chart.js 
 
-### Custom API
-https://dkrtmelljyeyesrteyhf.supabase.co/rest/v1/${genre}_books`  *${genre} is from the function parameter*
+### API 3
+sample text
 
-## POST
-a post request is made to update the database with new entries
+
 
 # BUG HUNT
 known bugs:
-no known bugs at this time
+
 # FUTURE DEVELOPMENT FOR THIS PROJECT
-In the future, this project could include more books, genres, and further enhanced search features. With more tools at use, the value of this website would increase signifcantly. 
+write more later
