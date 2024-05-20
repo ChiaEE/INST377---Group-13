@@ -88,6 +88,7 @@ Endpoint Used from our Database: https://dkrtmelljyeyesrteyhf.supabase.co/rest/v
 
 ### Flickity Slider library
 Main Link: https://cdnjs.cloudflare.com/ajax/libs/flickity/2.2.2/flickity.pkgd.min.js
+
 Endpoint Used: https://gutendex.com/books
 
 ### Custom API
