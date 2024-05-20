@@ -1,18 +1,18 @@
 <html>
 <head>
-    <title>Children's Books</title>
+    <title>Comedy Books</title>
     <link rel="stylesheet" href="HomePage.css">
 </head>
 <body style="background-color: #226ca1;">
     <!-- Header Section -->
     <header id="bar">
-        <h1>Children's Books</h1>
+        <h1>Comedy Books</h1>
     </header>
 
     <!-- Navigation Menu -->
     <nav id="main-nav">
         <ul id="navList">
-            <li><a href="HomePage.html">HOME</a></li>
+            <li><a href="index.html">HOME</a></li>
             <li><a href="About_page.html">ABOUT</a></li>
             <li id="childrensBooksLink"><a href="Children'sBooks.html">Children's Books</a></li>
             <li id="fictionBooksLink"><a href="FictionBooks.html">Fiction Books</a></li>
@@ -28,18 +28,18 @@
         </ul>
     </nav>
 
-
-    <div id="childrenBooksList">
+   
+    <div id="comedyBooksList">
         <div id="loadingIndicator" style="display: none;">Loading books...</div>
     </div>
 
     <!-- JavaScript -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            fetchBooks("childrenBooksList"); // Corrected the container ID
-        });
+    fetchBooks("comedyBooksList"); 
+});
 
-        function fetchBooks(containerId) {
+function fetchBooks(containerId) {
     var topic = containerId.replace("BooksList", "").toLowerCase();
     var loadingElement = document.getElementById('loadingIndicator');
     loadingElement.style.display = 'block'; // Show the loading indicator
@@ -62,29 +62,29 @@
         });
 }
 
-        function displayBooks(books, containerId) {
-            var container = document.getElementById(containerId);
-            container.innerHTML = "";
+function displayBooks(books, containerId) {
+    var container = document.getElementById(containerId);
+    container.innerHTML = "";
 
-            if (books.length === 0) {
-                container.innerHTML = "No results found.";
-            } else {
-                var ul = document.createElement("ul");
-                books.forEach(function (book) {
-                    var title = book.title;
-                    var author = book.authors[0].name;
-                    var bookLink = book.formats["text/html"];
+    if (books.length === 0) {
+        container.innerHTML = "No results found.";
+    } else {
+        var ul = document.createElement("ul");
+        books.forEach(function (book) {
+            var title = book.title;
+            var author = book.authors[0].name;
+            var bookLink = book.formats["text/html"];
 
-                    var li = document.createElement("li");
-                    li.innerHTML = "<strong>Title:</strong> " + title + "<br>" +
-                        "<strong>Author:</strong> " + author + "<br>" +
-                        "<a href='" + bookLink + "' target='_blank'>Read on Project Gutenberg</a>";
+            var li = document.createElement("li");
+            li.innerHTML = "<strong>Title:</strong> " + title + "<br>" +
+                "<strong>Author:</strong> " + author + "<br>" +
+                "<a href='" + bookLink + "' target='_blank'>Read on Project Gutenberg</a>";
 
-                    ul.appendChild(li);
-                });
-                container.appendChild(ul);
-            }
-        }
+            ul.appendChild(li);
+        });
+        container.appendChild(ul);
+    }
+}
     </script>
 </body>
 </html>
