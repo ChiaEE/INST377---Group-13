@@ -1,10 +1,3 @@
-
-// supabase initialize
-const supabaseUrl = "https://dkrtmelljyeyesrteyhf.supabase.co";
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRrcnRtZWxsanlleWVzcnRleWhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTU1MzUxNTUsImV4cCI6MjAzMTExMTE1NX0.xLDZ3H1Y0sGUC8tVAccJqm5YK2hwtZyWMB_AZD5vb74";
-const supabase = supabase.createClient(supabaseUrl, supabaseKey);
-
-
 function fetchRandomBooks() {
     return fetch("https://gutendex.com/books")
         .then(response => response.json())
@@ -233,81 +226,57 @@ function displayChart(titles, downloadCounts) {
     });
 }
 
-async function loadBookData() {
-    var test = await fetch('http://localhost:3500/book_suggestions')
-        .then((res) => res.json())
-        .then((res) => {
-            console.log(res)
-            const element = document.getElementById("dataOnBooks");
-            if (element) {
-                element.remove();
-            }
-
-            var table = document.createElement('table');
-            table.setAttribute('id', 'dataOnBooks')
-
-            var tableRow = document.createElement('tr');
-
-            var tableHeading1 = document.createElement('th');
-            tableHeading1.innerHTML = "Book Name"
-            tableRow.appendChild(tableHeading1)
-
-            var tableHeading2 = document.createElement('th');
-            tableHeading2.innerHTML = "Author Name"
-            tableRow.appendChild(tableHeading2)
-
-            table.appendChild(tableRow)
-            var cutoff = document.getElementById('dataOnBooks');
-            cutoff.insertAdjacentElement("beforebegin", table)
-            for (var i = 0; i < res.length; i++) {
-                var bookRow = document.createElement('tr');
-                var bookName = document.createElement('td');
-                var bookAuthor = document.createElement('td');
-
-                bookName.innerHTML = res[i].book_name;
-                bookAuthor.innerHTML = res[i].book_author;
-
-                bookRow.appendChild(bookName);
-                bookRow.appendChild(bookAuthor);
-
-                table.appendChild(bookRow);
-            }
-        })
-}
-
-
-
 // Handle form submission
-const author = document.getElementById('author').innerText.trim();
-const title = document.getElementById('title').innerText.trim();
+// const supabaseClient = require("@supabase/supabase-js");
+// const bodyParser = require("body-parser");
+// const express = require("express");
+// let author = document.getElementById('author').innerText.trim();
+// let title = document.getElementById('title').innerText.trim();
 
-async function addSuggestion() {
-    console.log("Adding data to Supabase.");
-    const author = document.getElementById('author').value.trim();
-    const title = document.getElementById('title').value.trim();
-    console.log("Title and author: ", author, title);
-    // Collect form data
+// function addSuggestion() {
+//     console.log("Adding data to Supabase.");
+//     const author = document.getElementById('author').innerText.trim();
+//     const title = document.getElementById('title').innerText.trim();
+//     console.log("Title and author: ", author, title);
+//     // Collect form data
     
-    // Validate that both author and title fields are filled out
-    if (!author || !title) {
-        alert('Please fill out both the author name and title.');
-        return;
-    }
-    var test = await fetch("http://localhost:3500/book_suggestions", {
-        method: 'POST',
-        body: JSON.stringify({
-            "book_name": `${title}`,
-            "book_author": `${author}`
-        }),
-        headers: {
-            "Content-type": "application/json; charset=UTF-8"
-        }
-    })
-    .then((res) => res.json())
-    .then((res) => {
+//     // Validate that both author and title fields are filled out
+//     if (!author || !title) {
+//         alert('Please fill out both the author name and title.');
+//         return;
+//     }
+     
+//      // Insert data into Supabase table
+//      const { data, error } = supabase
+//          .from('book_suggestions')
+//          .insert({ book_name: title, book_author: author });
+     
+//          if (error) {
+//              console.error('Error inserting data:', error);
+//              document.getElementById('error').style.display = 'block';
+//              document.getElementById('confirmation').style.display = 'none';
+//          } else {
+//              if (data) {
+//                  console.log('Data inserted successfully:', data);
+//                  document.getElementById('confirmation').style.display = 'block';
+//                  document.getElementById('error').style.display = 'none';
+//                  // Clear the form
+//                  document.getElementById('user-form').reset();
+//              } else {
+//                  console.error('No data returned after insertion.');
+//                  // Handle this case as needed
+//              }
+//          }
+// }
 
-    })
-    await loadBookData; 
+// document.getElementById('user-form').addEventListener('submit', addSuggestion);
+
+function getAuthorName() {
+    console.log(document.getElementById("author").value);
 }
 
+function getBookName() {
+    console.log(document.getElementById("title").value);
+}
 
+window.onload = getAuthorName, getBookName;
